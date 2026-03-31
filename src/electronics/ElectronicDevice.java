@@ -1,0 +1,74 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package electronics;
+
+import bazaar.IForSale;
+import owner.Person;
+
+/**
+ *
+ * @author Tomáš
+ */
+public class ElectronicDevice implements IForSale {
+    private Person owner;
+    private String type;
+    private String brand;
+    private int yearOfManufacture;
+    private int monthsOfUse;
+    private int price;
+    private String comment;
+
+    public ElectronicDevice(Person owner, String type, String brand, int yearOfManufacture, int monthsOfUse, int price, String comment) {
+        this.owner = owner;
+        this.type = type;
+        this.brand = brand;
+        this.yearOfManufacture = yearOfManufacture;
+        this.monthsOfUse = monthsOfUse;
+        this.price = price;
+        this.comment = comment;
+    }
+    
+    public String toString() {
+        String text = this.type + " " + this.brand + ", vyrobené v roku " + this.yearOfManufacture; 
+        String text2 = " používané starým majiteľom " + this.monthsOfUse + " mesiacov, ponúka: " + this.owner.toString() + " za cenu " + this.price + "€\n";
+        String komentar1 = "Komentár použivateľa: " + this.comment;
+        return text + text2 + komentar1;
+    }
+    
+    public void print() {
+        System.out.println(this.toString());
+    }
+
+    public Person getOwner() {
+        return this.owner;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public String getBrand() {
+        return this.brand;
+    }
+
+    public int getYearOfManufacture() {
+        return this.yearOfManufacture;
+    }
+
+    public int getMonthsOfUse() {
+        return this.monthsOfUse;
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
+
+    public String getComment() {
+        return this.comment;
+    }
+
+    
+}
