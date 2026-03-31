@@ -26,7 +26,7 @@ public class Location {
     }
     
     public String toString() {
-        String text = " " + this.city + ", kontakt: " + this.getPhone() ;
+        String text = " " + this.city + ", contact: " + this.getPhone() ;
         return text;  
     }
     

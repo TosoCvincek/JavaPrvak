@@ -30,7 +30,7 @@ public class Mobile extends ElectronicDevice {
 
     @Override
     public String toString() {
-        return super.toString() + "Frekvencie procesora: " + this.processorFrequency + "Hz, RAM: " + this.ram + "GB, interná pamäť: " + this.internalStorage + "GB, výdrž batérie: " + this.batteryLife + "mAh, rozlíšenie fotoaparátu: " + this.cameraResolution + "megapixelov \n";
+        return super.toString() + "Processor frequency: " + this.processorFrequency + "Hz, RAM: " + this.ram + "GB, internal storage: " + this.internalStorage + "GB, battery life: " + this.batteryLife + "mAh, camera resolution: " + this.cameraResolution + " megapixels \n";
     }
     
     @Override

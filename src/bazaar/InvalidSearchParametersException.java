@@ -15,6 +15,6 @@ public class InvalidSearchParametersException extends IllegalArgumentException {
      * @param parameters 
      */
     public InvalidSearchParametersException (String parameters) {
-        super ("Paramtetre: " + parameters + " nevyhovujú žiadnému inzerátu, je nám ľúto.");
+        super ("Parameters: " + parameters + " do not match any listing, we are sorry.");
     }
 }

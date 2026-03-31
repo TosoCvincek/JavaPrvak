@@ -32,9 +32,9 @@ public class ElectronicDevice implements IForSale {
     }
     
     public String toString() {
-        String text = this.type + " " + this.brand + ", vyrobené v roku " + this.yearOfManufacture; 
-        String text2 = " používané starým majiteľom " + this.monthsOfUse + " mesiacov, ponúka: " + this.owner.toString() + " za cenu " + this.price + "€\n";
-        String komentar1 = "Komentár použivateľa: " + this.comment;
+        String text = this.type + " " + this.brand + ", manufactured in year " + this.yearOfManufacture; 
+        String text2 = " used by previous owner for " + this.monthsOfUse + " months, offered by: " + this.owner.toString() + " for price " + this.price + "€\n";
+        String komentar1 = "User comment: " + this.comment;
         return text + text2 + komentar1;
     }
     

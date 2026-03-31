@@ -13,9 +13,9 @@ import owner.Person;
  * @author Tomáš
  */
 /**
- * Trieda Auto ohsahuje atribúty, ktoré sú parametrom auta, ktoré bude neskôr inzerátom. 
- * Niektoré sú primitívnych tipov, niektoré typu String a atribút majitel je typu Osoba.
- * Majitel je vkladaný asociáciou, pretože aj jedna osoba môže mať viac aut.
+ * The Vehicle class contains attributes that describe a vehicle for listing in the bazaar.
+ * Some are primitive types, some are String type, and the owner attribute is of type Person.
+ * Owner is linked by association because one person can own multiple vehicles.
  * @author Tomáš Cvinček
  * @version 2.0
  */
@@ -34,18 +34,18 @@ public class Vehicle implements IForSale {
     private String comment;
     private String fuel;
      /**
-      * V konštruktore sa vytvorí inštancia auto, ktorá musí mať vopred definované vlastnosti a majiteľa, preto parametrami konšturktora sú všetky paramatre vozidla.
-      * @param person majiteľ vozidla typu Osoba
-      * @param brand značka auta
-      * @param model model auta
-      * @param power výkon motora v KW
-      * @param yearOfManufacture rok, kedy bolo auto vyrobené
-      * @param engineDisplacement obsah motora v metroch kubických 
-      * @param drivenKm doposiaľ odjazdených km na danom aute 
-      * @param bodyType karoséria vozidla
-      * @param color farba vozidla
-      * @param price cena vozidla v €
-      * @param comment dodotočný komentár autora
+      * The constructor creates a vehicle instance with all required properties and owner.
+      * @param person vehicle owner of type Person
+      * @param brand vehicle brand
+      * @param model vehicle model
+      * @param power engine power in KW
+      * @param yearOfManufacture year the vehicle was manufactured
+      * @param engineDisplacement engine displacement in cubic meters
+      * @param drivenKm kilometers driven so far
+      * @param bodyType vehicle body type
+      * @param color vehicle color
+      * @param price vehicle price in €
+      * @param comment additional user comment
       */
     public Vehicle(Person person, String vehicleType, String brand, String model, int power, int yearOfManufacture, double engineDisplacement, int drivenKm, String bodyType, String color, int price, String fuel, String comment) {
         this.owner = person;
@@ -65,123 +65,122 @@ public class Vehicle implements IForSale {
     }
     
     /**
-     *Metóda toString() je metóda, v ktorej sa snažím získať hodnoty atribútov v zmysluplnej vete, obsahuje spájanie reťazcov.
-     *@return reťazec, ktorý hovorí o parametroch vozidla
+     * Returns a string representation of the vehicle's attributes.
+     * @return string describing the vehicle parameters
      */
     public String toString() {
-        String text = this.vehicleType + " " + this.brand + " " + this.model + " " + this.bodyType + ", " + this.fuel + ", " + this.engineDisplacement + ", " + this.color + ", vyrobené v roku " + this.yearOfManufacture; 
-        String text2 = " s výkonom " + this.power + "KW, ktoré má nabehané " + this.drivenKm + "km ponúka: " + this.owner.toString() + " za cenu " + this.price + "€\n";
-        String komentar1 = "Komentár použivateľa: " + this.comment;
+        String text = this.vehicleType + " " + this.brand + " " + this.model + " " + this.bodyType + ", " + this.fuel + ", " + this.engineDisplacement + ", " + this.color + ", manufactured in year " + this.yearOfManufacture; 
+        String text2 = " with power " + this.power + "KW, with " + this.drivenKm + "km driven, offered by: " + this.owner.toString() + " for price " + this.price + "€\n";
+        String komentar1 = "User comment: " + this.comment;
         return text + text2 + komentar1;
     }
     
     /**
-     *Metóda vypis() je metóda, v ktorej sa snažím vypísať metódu toString() na terminál.
-     * 
+     * Prints the vehicle details to the terminal.
      */
     public void print() {
         System.out.println(this.toString());
     }
     
     /**
-     *Vrátí značku auta.
-     *@return značka vozidla
+     * Returns the vehicle brand.
+     * @return vehicle brand
      */
     public String getBrand() {
         return this.brand;
     }
 
     /**
-     *Vrátí model auta.
-     *@return model vozidla
+     * Returns the vehicle model.
+     * @return vehicle model
      */
     public String getModel() {
         return this.model;
     }
     
     /**
-     *Vrátí majiteľa vozidla
-     *@return Objekt typu osoba 
+     * Returns the vehicle owner.
+     * @return Person object
      */
     public Person getOwner() {
         return this.owner;
     }
     
     /**
-     *Vrátí výkon motora vozidla v KW.
-     *@return výkon motora v KW
+     * Returns the vehicle engine power in KW.
+     * @return engine power in KW
      */
     public int getPower() {
         return this.power;
     }   
     
     /**
-     *Vrátí rok výroby vozidla.
-     *@return rok výroby auta 
+     * Returns the year of manufacture.
+     * @return year of manufacture
      */
     public int getYearOfManufacture() {
         return this.yearOfManufacture;
     }
     
     /**
-     *Vrátí doposiaľ najazdené km vozidla.
-     *@return najazdené km auta
+     * Returns the kilometers driven.
+     * @return kilometers driven
      */
     public int getDrivenKm() {
         return this.drivenKm;
     }
     
     /**
-     *Vrátí typ karosérie vozidla.
-     *@return karoséria auta
+     * Returns the vehicle body type.
+     * @return body type
      */
     public String getBodyType() {
         return this.bodyType;
     }
     
     /**
-     *Vrátí farbu vozidla.
-     *@return farba auta
+     * Returns the vehicle color.
+     * @return vehicle color
      */
     public String getColor() {
         return this.color;
     }
     
     /**
-     *Vrátí obsah motora vozidla v metroch kubických.
-     *@return obsah motora auta
+     * Returns the engine displacement in cubic meters.
+     * @return engine displacement
      */
     public double getEngineDisplacement() {
         return this.engineDisplacement;
     }
     
     /**
-     *Vrátí cenu vozidla v €.
-     *@return cena vozidla
+     * Returns the vehicle price in €.
+     * @return vehicle price
      */
     public int getPrice() {
         return this.price;
     }
     
     /**
-     *Vrátí typ vozidla.
-     *@return typ vozidla
+     * Returns the vehicle type.
+     * @return vehicle type
      */
     public String getVehicleType() {
         return this.vehicleType;
     }
     
     /**
-     *Vrátí komentar pouzivatela.
-     *@return komentar pouzivatela
+     * Returns the user comment.
+     * @return user comment
      */
     public String getComment() {
         return this.comment;
     }
     
     /**
-     *Vrátí palivo vozidla. 
-     *@return palivo vozidla
+     * Returns the vehicle fuel type.
+     * @return fuel type
      */
     public String getFuel() {
         return this.fuel;

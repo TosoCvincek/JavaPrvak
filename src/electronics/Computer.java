@@ -27,7 +27,7 @@ public class Computer extends ElectronicDevice {
 
     @Override
     public String toString() {
-        return super.toString() + "Frekvencie procesora: " + this.processorFrequency + "Hz, RAM: " + this.ram + "GB, interná pamäť: " + this.internalStorage + "GB, uhlopriečka displeja: " + this.displayDiagonal + "cm \n";
+        return super.toString() + "Processor frequency: " + this.processorFrequency + "Hz, RAM: " + this.ram + "GB, internal storage: " + this.internalStorage + "GB, display diagonal: " + this.displayDiagonal + "cm \n";
     }
     
     @Override

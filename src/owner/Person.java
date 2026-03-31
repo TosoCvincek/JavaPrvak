@@ -54,7 +54,7 @@ public class Person {
     }
     
     public String toString () {
-        String toString = this.firstName + " " + this.lastName + " " + "narodeny:" + this.dateOfBirth.toString() + this.location.toString();
+        String toString = this.firstName + " " + this.lastName + " " + "born:" + this.dateOfBirth.toString() + this.location.toString();
         return toString;
     }
     

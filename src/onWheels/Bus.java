@@ -23,7 +23,7 @@ public class Bus extends Vehicle {
     
     @Override
     public String toString() {
-        return super.toString() + "Pocet miest na sedenie: " + this.seatCount + ", emisná trieda: " + this.emissionClass + "\n";
+        return super.toString() + "Number of seats: " + this.seatCount + ", emission class: " + this.emissionClass + "\n";
     }
 
     @Override

@@ -24,7 +24,7 @@ public class Truck extends Vehicle {
     
     @Override
     public String toString() {
-        return super.toString() + "Maximalna nosnost: " + this.maxLoadCapacity + ", emisná trieda: " + this.emissionClass + "\n";
+        return super.toString() + "Maximum load capacity: " + this.maxLoadCapacity + ", emission class: " + this.emissionClass + "\n";
     }
 
     @Override

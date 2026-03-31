@@ -16,23 +16,23 @@ public class Date {
     public Date(int day, int month, int year) {    
         this.year = year;
         if ( month > 12 ) {
-            System.out.println("Zadaný mesiac neexistuje.");
+            System.out.println("Invalid month entered.");
             this.month = 12;
         } else {
             this.day = day;
             this.month = month;
         }
         if (this.month == (1 | 3 | 5 | 8 | 7 | 10 | 12) && this.day > 31) {
-            System.out.println("Zadaný deň neexistuje.");
+            System.out.println("Invalid day entered.");
             this.day = 31;
         } else if (this.month == (4 | 6 | 9 | 11) && this.day > 30) {
-            System.out.println("Zadaný deň neexistuje.");
+            System.out.println("Invalid day entered.");
             this.day = 30;
         } else if (this.month == 2 && this.isLeapYear() /* == true */ && this.day > 29) {
-            System.out.println("Zadaný deň neexistuje.");
+            System.out.println("Invalid day entered.");
             this.day = 29;
         } else if (this.month == 2 && this.isLeapYear() /* == false */ && this.day > 28) {
-            System.out.println("Zadaný deň neexistuje.");
+            System.out.println("Invalid day entered.");
             this.day = 28;
         }
         
@@ -112,7 +112,7 @@ public class Date {
                 rok = rok + 1;
             }
         }
-        return ("Zajtra je: " + den + "." + mesiac + "." + rok);
+        return ("Tomorrow is: " + den + "." + mesiac + "." + rok);
     }
     
     public int getDay() {
