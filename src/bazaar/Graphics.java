@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bazar;
+package bazaar;
 
 
 import java.io.FileNotFoundException;
@@ -15,23 +15,23 @@ import javax.swing.JOptionPane;
  *
  * @author Tomáš
  */
-public class Grafika extends javax.swing.JFrame {
+public class Graphics extends javax.swing.JFrame {
     /**
-     * Creates new form Grafika
+     * Creates new form Graphics
      */
-    private Inzerat databaza;
-    public Grafika() throws IOException {
+    private Listing database;
+    public Graphics() throws IOException {
         this.initComponents();
-        this.datumLB.setText("Dátum: " + new Date().toString());
-        this.databaza = new Inzerat();
-        try { //pokus nacitat databazu zo suboru, v pripade neuspechu, vyhodí výnimku
-            this.databaza.nacitajDatabazu();
-            this.nacitanieL.setText("Databáza úspešné načítaná!");
+        this.dateLB.setText("Date: " + new Date().toString());
+        this.database = new Listing();
+        try {
+            this.database.loadDatabase();
+            this.loadStatusL.setText("Database loaded successfully!");
         } catch (FileNotFoundException ex) {
-            this.nacitanieL.setText("Nepodarilo sa načítať databázu, skúste znova. Ak sa tým problém nevyrieši, kontaktujte správcu Toša.");
-            this.exL.setText("Chyba: " +  ex.getMessage());
+            this.loadStatusL.setText("Failed to load database, please try again. If the problem persists, contact the administrator.");
+            this.exL.setText("Error: " +  ex.getMessage());
         }
-        this.setTitle("Bazár");
+        this.setTitle("Bazaar");
             
     }
 
@@ -45,12 +45,12 @@ public class Grafika extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        nakupBT = new javax.swing.JButton();
-        predajBT = new javax.swing.JButton();
-        koniecBT = new javax.swing.JButton();
-        autorLB = new javax.swing.JLabel();
-        datumLB = new javax.swing.JLabel();
-        nacitanieL = new javax.swing.JLabel();
+        purchaseBT = new javax.swing.JButton();
+        saleBT = new javax.swing.JButton();
+        exitBT = new javax.swing.JButton();
+        authorLB = new javax.swing.JLabel();
+        dateLB = new javax.swing.JLabel();
+        loadStatusL = new javax.swing.JLabel();
         exL = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -63,37 +63,37 @@ public class Grafika extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Dobrý deň. Vitajte v mojom malom bazáre. Pre pokračovanie zvoľte možnosť v menu.");
+        jLabel1.setText("Good day. Welcome to my small bazaar. Please choose an option from the menu to continue.");
         jLabel1.setToolTipText("");
 
-        nakupBT.setText(" Nákup v bazári");
-        nakupBT.addActionListener(new java.awt.event.ActionListener() {
+        purchaseBT.setText(" Purchase");
+        purchaseBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nakupBTActionPerformed(evt);
+                purchaseBTActionPerformed(evt);
             }
         });
 
-        predajBT.setText("Pridať inzerát ");
-        predajBT.addActionListener(new java.awt.event.ActionListener() {
+        saleBT.setText("Add Listing ");
+        saleBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                predajBTActionPerformed(evt);
+                saleBTActionPerformed(evt);
             }
         });
 
-        koniecBT.setText("Koniec");
-        koniecBT.addActionListener(new java.awt.event.ActionListener() {
+        exitBT.setText("Exit");
+        exitBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                koniecBTActionPerformed(evt);
+                exitBTActionPerformed(evt);
             }
         });
 
-        autorLB.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        autorLB.setForeground(new java.awt.Color(0, 0, 102));
-        autorLB.setText("Made by Tomáš Cvinček 5zy012 2018");
+        authorLB.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        authorLB.setForeground(new java.awt.Color(0, 0, 102));
+        authorLB.setText("Made by Tomáš Cvinček 5zy012 2018");
 
-        datumLB.setText("jLabel2");
+        dateLB.setText("jLabel2");
 
-        nacitanieL.setText("jLabel2");
+        loadStatusL.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,20 +106,20 @@ public class Grafika extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(datumLB)
+                        .addComponent(dateLB)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 399, Short.MAX_VALUE)
-                        .addComponent(autorLB))
+                        .addComponent(authorLB))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(127, 127, 127)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(predajBT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(koniecBT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nakupBT, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)))
+                                    .addComponent(saleBT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(exitBT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(purchaseBT, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(nacitanieL)))
+                                .addComponent(loadStatusL)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -133,22 +133,22 @@ public class Grafika extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nacitanieL)
+                .addComponent(loadStatusL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exL)
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(nakupBT)
+                        .addComponent(purchaseBT)
                         .addGap(18, 18, 18)
-                        .addComponent(predajBT)
+                        .addComponent(saleBT)
                         .addGap(18, 18, 18)
-                        .addComponent(koniecBT)
+                        .addComponent(exitBT)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                        .addComponent(autorLB, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(authorLB, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(datumLB)))
+                        .addComponent(dateLB)))
                 .addContainerGap())
         );
 
@@ -157,31 +157,31 @@ public class Grafika extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        int reply = JOptionPane.showConfirmDialog(null, "Naozaj chceš skončiť?", "Koniec", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, "Do you really want to quit?", "Exit", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
     }//GEN-LAST:event_formWindowClosing
 
-    private void koniecBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_koniecBTActionPerformed
+    private void exitBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTActionPerformed
         // TODO add your handling code here:
-        int reply = JOptionPane.showConfirmDialog(null, "Naozaj chceš skončiť?", "Koniec", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, "Do you really want to quit?", "Exit", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
-    }//GEN-LAST:event_koniecBTActionPerformed
+    }//GEN-LAST:event_exitBTActionPerformed
 
-    private void nakupBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nakupBTActionPerformed
+    private void purchaseBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseBTActionPerformed
         // TODO add your handling code here:
-        NakupGrafika nakup = NakupGrafika.getInstanceNakupGrafika(this.databaza); // vytvorenie instancie noveho okna
-        nakup.setVisible(true);
-    }//GEN-LAST:event_nakupBTActionPerformed
+        PurchaseGraphics purchase = PurchaseGraphics.getInstance(this.database);
+        purchase.setVisible(true);
+    }//GEN-LAST:event_purchaseBTActionPerformed
 
-    private void predajBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_predajBTActionPerformed
+    private void saleBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleBTActionPerformed
         // TODO add your handling code here:
-        PredajGrafika predaj = PredajGrafika.getInstancePredajGrafika(this.databaza); // vytvorenie instancie noveho okna
-        predaj.setVisible(true);
-    }//GEN-LAST:event_predajBTActionPerformed
+        SaleGraphics sale = SaleGraphics.getInstance(this.database);
+        sale.setVisible(true);
+    }//GEN-LAST:event_saleBTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,13 +200,13 @@ public class Grafika extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Grafika.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Graphics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Grafika.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Graphics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Grafika.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Graphics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Grafika.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Graphics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -215,7 +215,7 @@ public class Grafika extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new Grafika().setVisible(true);
+                    new Graphics().setVisible(true);
                 } catch (IOException ex) {
                     ex.getMessage();
                 }
@@ -224,13 +224,13 @@ public class Grafika extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel autorLB;
-    private javax.swing.JLabel datumLB;
+    private javax.swing.JLabel authorLB;
+    private javax.swing.JLabel dateLB;
     private javax.swing.JLabel exL;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton koniecBT;
-    private javax.swing.JLabel nacitanieL;
-    private javax.swing.JButton nakupBT;
-    private javax.swing.JButton predajBT;
+    private javax.swing.JButton exitBT;
+    private javax.swing.JLabel loadStatusL;
+    private javax.swing.JButton purchaseBT;
+    private javax.swing.JButton saleBT;
     // End of variables declaration//GEN-END:variables
 }

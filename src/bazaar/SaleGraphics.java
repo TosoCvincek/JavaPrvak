@@ -3,48 +3,48 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bazar;
+package bazaar;
 
-import elektronika.Elektronika;
-import elektronika.Mobil;
-import elektronika.Pocitac;
+import electronics.Electronics;
+import electronics.Mobile;
+import electronics.Computer;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import majitel.Osoba;
-import naKolesach.Auto;
-import naKolesach.Autobus;
-import naKolesach.Kamion;
-import naKolesach.Motorka;
-import zahradneMasiny.Kosacka;
-import zahradneMasiny.Krovinorez;
-import zahradneMasiny.MotorovaPila;
+import owner.Person;
+import onWheels.Car;
+import onWheels.Bus;
+import onWheels.Truck;
+import onWheels.Motorcycle;
+import gardenMachines.LawnMower;
+import gardenMachines.BrushCutter;
+import gardenMachines.Chainsaw;
 
 /**
  *
  * @author Tomáš
  */
-public class PredajGrafika extends javax.swing.JFrame {
-    private Inzerat inz;
-    private static PredajGrafika instancia = null;
+public class SaleGraphics extends javax.swing.JFrame {
+    private Listing listing;
+    private static SaleGraphics instance = null;
     /**
-     * Creates new form PredajGrafika
+     * Creates new form SaleGraphics
      */
     
-    public static PredajGrafika getInstancePredajGrafika (Inzerat inz) {
-        if (instancia == null) {
-            instancia = new PredajGrafika(inz);
+    public static SaleGraphics getInstance (Listing listing) {
+        if (instance == null) {
+            instance = new SaleGraphics(listing);
         } 
-        return instancia;
+        return instance;
     }  
     
-    private PredajGrafika(Inzerat inz) {
+    private SaleGraphics(Listing listing) {
         initComponents();
-        this.inz = inz;
-        this.volbaL.setVisible(false);;
-        this.volbaCB.setVisible(false);
+        this.listing = listing;
+        this.choiceL.setVisible(false);;
+        this.choiceCB.setVisible(false);
         this.L70.setVisible(false);
         this.T70.setVisible(false);
         this.L60.setVisible(false);
@@ -59,7 +59,7 @@ public class PredajGrafika extends javax.swing.JFrame {
         this.T80.setVisible(false);
         this.L30.setVisible(false);
         this.T30.setVisible(false);
-        this.volbaL.setVisible(false);
+        this.choiceL.setVisible(false);
         this.L20.setVisible(false);
         this.T20.setVisible(false);
         this.L00.setVisible(false);
@@ -81,10 +81,10 @@ public class PredajGrafika extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        druhL = new javax.swing.JLabel();
-        druhCB = new javax.swing.JComboBox<>();
-        volbaL = new javax.swing.JLabel();
-        volbaCB = new javax.swing.JComboBox<>();
+        typeL = new javax.swing.JLabel();
+        typeCB = new javax.swing.JComboBox<>();
+        choiceL = new javax.swing.JLabel();
+        choiceCB = new javax.swing.JComboBox<>();
         L00 = new javax.swing.JLabel();
         L10 = new javax.swing.JLabel();
         L20 = new javax.swing.JLabel();
@@ -105,25 +105,25 @@ public class PredajGrafika extends javax.swing.JFrame {
         T60 = new javax.swing.JTextField();
         T70 = new javax.swing.JTextField();
         T80 = new javax.swing.JTextField();
-        cenaT = new javax.swing.JTextField();
-        komentarT = new javax.swing.JTextField();
+        priceT = new javax.swing.JTextField();
+        commentT = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        menoT = new javax.swing.JTextField();
-        priezviskoT = new javax.swing.JTextField();
+        firstNameT = new javax.swing.JTextField();
+        lastNameT = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        denT = new javax.swing.JTextField();
-        mesiacT = new javax.swing.JTextField();
-        rokT = new javax.swing.JTextField();
+        dayT = new javax.swing.JTextField();
+        monthT = new javax.swing.JTextField();
+        yearT = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        mestoT = new javax.swing.JTextField();
-        cisloT = new javax.swing.JTextField();
+        cityT = new javax.swing.JTextField();
+        phoneT = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        pridajB = new javax.swing.JButton();
+        addB = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         L01 = new javax.swing.JLabel();
         L11 = new javax.swing.JLabel();
@@ -139,47 +139,47 @@ public class PredajGrafika extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel1.setText("Vitajte v sekcií pridávania inzerátu. Pokračujte výberom možností.");
+        jLabel1.setText("Welcome to the listing addition section. Continue by selecting options.");
 
-        druhL.setText("Zvoľte druh inzerátu");
+        typeL.setText("Choose listing type");
 
-        druhCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vozidlo", "Mašina do záhrady", "Elektronika" }));
-        druhCB.addActionListener(new java.awt.event.ActionListener() {
+        typeCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vehicle", "Garden Machine", "Electronics" }));
+        typeCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                druhCBActionPerformed(evt);
+                typeCBActionPerformed(evt);
             }
         });
 
-        volbaL.setText("Zvoľte typ vozidla");
+        choiceL.setText("Choose vehicle type");
 
-        volbaCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Zvoľte...", "Auto", "Motorka", "Kamión", "Autobus" }));
-        volbaCB.addActionListener(new java.awt.event.ActionListener() {
+        choiceCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose...", "Car", "Motorcycle", "Truck", "Bus" }));
+        choiceCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                volbaCBActionPerformed(evt);
+                choiceCBActionPerformed(evt);
             }
         });
 
-        L00.setText("Značka");
+        L00.setText("Brand");
 
         L10.setText("Model");
 
-        L20.setText("Výkon");
+        L20.setText("Power");
 
-        L30.setText("Rok výroby");
+        L30.setText("Year of manufacture");
 
-        L40.setText("Obsah motora");
+        L40.setText("Engine displacement");
 
-        L50.setText("Najazdené km");
+        L50.setText("Driven km");
 
-        L60.setText("Karoséria");
+        L60.setText("Body type");
 
-        L70.setText("Farba");
+        L70.setText("Color");
 
-        L80.setText("Palivo");
+        L80.setText("Fuel");
 
-        jLabel11.setText("Cena");
+        jLabel11.setText("Price");
 
-        jLabel12.setText("Váš komentár");
+        jLabel12.setText("Your comment");
 
         T00.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,59 +211,59 @@ public class PredajGrafika extends javax.swing.JFrame {
             }
         });
 
-        cenaT.addActionListener(new java.awt.event.ActionListener() {
+        priceT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cenaTActionPerformed(evt);
+                priceTActionPerformed(evt);
             }
         });
 
-        komentarT.addActionListener(new java.awt.event.ActionListener() {
+        commentT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                komentarTActionPerformed(evt);
+                commentTActionPerformed(evt);
             }
         });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel13.setText("Vaše osobné údaje");
+        jLabel13.setText("Your personal details");
 
-        jLabel14.setText("Meno");
+        jLabel14.setText("First name");
 
-        jLabel15.setText("Priezvisko");
+        jLabel15.setText("Last name");
 
-        jLabel16.setText("Deň");
+        jLabel16.setText("Day");
 
-        jLabel17.setText("Mesiac");
+        jLabel17.setText("Month");
 
-        jLabel18.setText("Rok");
+        jLabel18.setText("Year");
 
-        mesiacT.addActionListener(new java.awt.event.ActionListener() {
+        monthT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mesiacTActionPerformed(evt);
+                monthTActionPerformed(evt);
             }
         });
 
-        jLabel19.setText("Mesto");
+        jLabel19.setText("City");
 
-        jLabel20.setText("Tel. číslo");
+        jLabel20.setText("Phone no.");
 
-        mestoT.addActionListener(new java.awt.event.ActionListener() {
+        cityT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mestoTActionPerformed(evt);
+                cityTActionPerformed(evt);
             }
         });
 
-        cisloT.addActionListener(new java.awt.event.ActionListener() {
+        phoneT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cisloTActionPerformed(evt);
+                phoneTActionPerformed(evt);
             }
         });
 
-        jLabel21.setText("Dátum narodenia");
+        jLabel21.setText("Date of birth");
 
-        pridajB.setText("Pridaj inzerát");
-        pridajB.addActionListener(new java.awt.event.ActionListener() {
+        addB.setText("Add listing");
+        addB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pridajBActionPerformed(evt);
+                addBActionPerformed(evt);
             }
         });
 
@@ -294,16 +294,16 @@ public class PredajGrafika extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(37, 37, 37)
-                                    .addComponent(menoT, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(priezviskoT, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(firstNameT, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lastNameT, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel19)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(mestoT, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(cityT, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel13)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(L00)
-                                .addComponent(volbaL)
+                                .addComponent(choiceL)
                                 .addComponent(L10)
                                 .addComponent(L30)
                                 .addComponent(L40)
@@ -326,12 +326,12 @@ public class PredajGrafika extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(18, 18, 18)
-                                                .addComponent(denT, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(dayT, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(mesiacT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(rokT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                    .addComponent(monthT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(yearT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                         .addGap(111, 111, 111)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -344,15 +344,15 @@ public class PredajGrafika extends javax.swing.JFrame {
                                             .addComponent(T01, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addComponent(T11, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(cenaT, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(cisloT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)))
+                                                .addComponent(priceT, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(phoneT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel2))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(15, 15, 15)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(T00, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(volbaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(choiceCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(T10, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(T20, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(T30, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,16 +366,16 @@ public class PredajGrafika extends javax.swing.JFrame {
                                     .addComponent(L01)
                                     .addComponent(L11)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(druhL)
+                        .addComponent(typeL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(druhCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(typeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(268, 268, 268)))
                 .addGap(18, 111, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(komentarT, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(commentT, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel12))
-                    .addComponent(pridajB))
+                    .addComponent(addB))
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
@@ -385,12 +385,12 @@ public class PredajGrafika extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(druhL)
-                    .addComponent(druhCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(typeL)
+                    .addComponent(typeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(volbaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(volbaL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(choiceCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(choiceL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(L00)
@@ -439,45 +439,45 @@ public class PredajGrafika extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(menoT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(firstNameT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(priezviskoT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lastNameT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel15))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mestoT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cityT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel19)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel16)
-                                    .addComponent(denT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(dayT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel17)
-                                    .addComponent(mesiacT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(monthT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel20)
-                                    .addComponent(cisloT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(phoneT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel11)
-                                    .addComponent(cenaT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(priceT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18)
-                            .addComponent(rokT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(yearT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addGap(12, 12, 12)
-                        .addComponent(komentarT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(commentT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21)
-                        .addComponent(pridajB)))
+                        .addComponent(addB)))
                 .addContainerGap())
         );
 
@@ -485,7 +485,7 @@ public class PredajGrafika extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     /**
-     * Nastavi komponenty neviditelne
+     * Sets components invisible
      */
     private void setInvisibleComponents() {
         this.L70.setVisible(false);
@@ -515,266 +515,266 @@ public class PredajGrafika extends javax.swing.JFrame {
     
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        int reply = JOptionPane.showConfirmDialog(null, "Naozaj chceš skončiť, tvoje dáta sa stratia", "Koniec", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, "Do you really want to quit, your data will be lost", "Exit", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             dispose();
         }
         
     }//GEN-LAST:event_formWindowClosing
     /**
-     * Na zaklade combo boxu zviditelnuje jednotlive labely a text fieldy podla podmienky
+     * Makes individual labels and text fields visible based on the combo box condition
      * @param evt 
      */
-    private void volbaCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volbaCBActionPerformed
+    private void choiceCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choiceCBActionPerformed
         // TODO add your handling code here:
-       if(druhCB.getSelectedIndex() == 0) {
-           if (volbaCB.getSelectedIndex() == 0) {
+       if(typeCB.getSelectedIndex() == 0) {
+           if (choiceCB.getSelectedIndex() == 0) {
                this.setInvisibleComponents();
                this.L00.setVisible(true);
-               this.L00.setText("Značka");
+               this.L00.setText("Brand");
                this.T00.setVisible(true);
                this.L10.setVisible(true);
                this.L10.setText("Model");
                this.T10.setVisible(true);
                this.L20.setVisible(true);
-               this.L20.setText("Vykon");
+               this.L20.setText("Power");
                this.T20.setVisible(true);
                this.L30.setVisible(true);
-               this.L30.setText("RokVyroby");
+               this.L30.setText("YearOfManufacture");
                this.T30.setVisible(true);
                this.L40.setVisible(true);
-               this.L40.setText("Obsah motora");
+               this.L40.setText("Engine displacement");
                this.T40.setVisible(true);
                this.L50.setVisible(true);
-               this.L50.setText("Najazdené km");
+               this.L50.setText("Driven km");
                this.T50.setVisible(true);
                this.L60.setVisible(true);
-               this.L60.setText("Karoséria");
+               this.L60.setText("Body type");
                this.T60.setVisible(true);
                this.L70.setVisible(true);
-               this.L70.setText("Farba");
+               this.L70.setText("Color");
                this.T70.setVisible(true);
                this.L80.setVisible(true);
-               this.L80.setText("Palivo");
+               this.L80.setText("Fuel");
                this.T80.setVisible(true);
-           } else if (volbaCB.getSelectedIndex() == 1) {
+           } else if (choiceCB.getSelectedIndex() == 1) {
                this.setInvisibleComponents();
                this.L00.setVisible(true);
-               this.L00.setText("Značka");
+               this.L00.setText("Brand");
                this.T00.setVisible(true);
                this.L10.setVisible(true);
                this.L10.setText("Model");
                this.T10.setVisible(true);
                this.L20.setVisible(true);
-               this.L20.setText("Vykon");
+               this.L20.setText("Power");
                this.T20.setVisible(true);
                this.L30.setVisible(true);
-               this.L30.setText("RokVyroby");
+               this.L30.setText("YearOfManufacture");
                this.T30.setVisible(true);
                this.L40.setVisible(true);
-               this.L40.setText("Obsah motora");
+               this.L40.setText("Engine displacement");
                this.T40.setVisible(true);
                this.L50.setVisible(true);
-               this.L50.setText("Najazdené km");
+               this.L50.setText("Driven km");
                this.T50.setVisible(true);
                this.L60.setVisible(true);
-               this.L60.setText("Karoséria");
+               this.L60.setText("Body type");
                this.T60.setVisible(true);
                this.L70.setVisible(true);
-               this.L70.setText("Farba");
+               this.L70.setText("Color");
                this.T70.setVisible(true);
                this.L80.setVisible(true);
-               this.L80.setText("Palivo");
+               this.L80.setText("Fuel");
                this.T80.setVisible(true);
-           } else if (volbaCB.getSelectedIndex() == 2) {
+           } else if (choiceCB.getSelectedIndex() == 2) {
                this.setInvisibleComponents();
                this.L00.setVisible(true);
-               this.L00.setText("Značka");
+               this.L00.setText("Brand");
                this.T00.setVisible(true);
                this.L10.setVisible(true);
                this.L10.setText("Model");
                this.T10.setVisible(true);
                this.L20.setVisible(true);
-               this.L20.setText("Vykon");
+               this.L20.setText("Power");
                this.T20.setVisible(true);
                this.L30.setVisible(true);
-               this.L30.setText("RokVyroby");
+               this.L30.setText("YearOfManufacture");
                this.T30.setVisible(true);
                this.L40.setVisible(true);
-               this.L40.setText("Obsah motora");
+               this.L40.setText("Engine displacement");
                this.T40.setVisible(true);
                this.L50.setVisible(true);
-               this.L50.setText("Najazdené km");
+               this.L50.setText("Driven km");
                this.T50.setVisible(true);
                this.L60.setVisible(true);
-               this.L60.setText("Karoséria");
+               this.L60.setText("Body type");
                this.T60.setVisible(true);
                this.L70.setVisible(true);
-               this.L70.setText("Farba");
+               this.L70.setText("Color");
                this.T70.setVisible(true);
                this.L80.setVisible(true);
-               this.L80.setText("Palivo");
+               this.L80.setText("Fuel");
                this.T80.setVisible(true);
                this.L01.setVisible(true);
-               this.L01.setText("Emisná t.");
+               this.L01.setText("Emission cl.");
                this.L11.setVisible(true);
-               this.L11.setText("Poč. miest");
+               this.L11.setText("Seat count");
                this:T01.setVisible(true);
                this.T11.setVisible(true);
-           } else if (volbaCB.getSelectedIndex() == 3) {
+           } else if (choiceCB.getSelectedIndex() == 3) {
                this.setInvisibleComponents();
                this.L00.setVisible(true);
-               this.L00.setText("Značka");
+               this.L00.setText("Brand");
                this.T00.setVisible(true);
                this.L10.setVisible(true);
                this.L10.setText("Model");
                this.T10.setVisible(true);
                this.L20.setVisible(true);
-               this.L20.setText("Vykon");
+               this.L20.setText("Power");
                this.T20.setVisible(true);
                this.L30.setVisible(true);
-               this.L30.setText("RokVyroby");
+               this.L30.setText("YearOfManufacture");
                this.T30.setVisible(true);
                this.L40.setVisible(true);
-               this.L40.setText("Obsah motora");
+               this.L40.setText("Engine displacement");
                this.T40.setVisible(true);
                this.L50.setVisible(true);
-               this.L50.setText("Najazdené km");
+               this.L50.setText("Driven km");
                this.T50.setVisible(true);
                this.L60.setVisible(true);
-               this.L60.setText("Karoséria");
+               this.L60.setText("Body type");
                this.T60.setVisible(true);
                this.L70.setVisible(true);
-               this.L70.setText("Farba");
+               this.L70.setText("Color");
                this.T70.setVisible(true);
                this.L80.setVisible(true);
-               this.L80.setText("Palivo");
+               this.L80.setText("Fuel");
                this.T80.setVisible(true);
                this.L01.setVisible(true);
-               this.L01.setText("Emisná t.");
+               this.L01.setText("Emission cl.");
                this.L11.setVisible(true);
-               this.L11.setText("Nosnosť");
+               this.L11.setText("Load capacity");
                this:T01.setVisible(true);
                this.T11.setVisible(true);
            }
-       } else if (druhCB.getSelectedIndex() == 1) {
+       } else if (typeCB.getSelectedIndex() == 1) {
            this.setInvisibleComponents();
             this.L00.setVisible(true);
-            this.L00.setText("Značka");
+            this.L00.setText("Brand");
             this.T00.setVisible(true);
             this.L10.setVisible(true);
-            this.L10.setText("Doba použ. v mes.");
+            this.L10.setText("Months of use");
             this.T10.setVisible(true);
             this.L20.setVisible(true);
-            this.L20.setText("Prikon");
+            this.L20.setText("Power input");
             this.T20.setVisible(true);
             this.L30.setVisible(true);
-            this.L30.setText("RokVyroby");
+            this.L30.setText("YearOfManufacture");
             this.T30.setVisible(true);
             this.L40.setVisible(true);
-            this.L40.setText("Objem motora");
+            this.L40.setText("Engine displacement");
             this.T40.setVisible(true);
-       } else if (druhCB.getSelectedIndex() == 2) {
-            if (volbaCB.getSelectedIndex() == 0) {
+       } else if (typeCB.getSelectedIndex() == 2) {
+            if (choiceCB.getSelectedIndex() == 0) {
                this.setInvisibleComponents();
                this.L00.setVisible(true);
-               this.L00.setText("Značka");
+               this.L00.setText("Brand");
                this.T00.setVisible(true);
                this.L10.setVisible(true);
-               this.L10.setText("RokVyroby");
+               this.L10.setText("YearOfManufacture");
                this.T10.setVisible(true);
                this.L20.setVisible(true);
-               this.L20.setText("Doba použ. v mes.");
+               this.L20.setText("Months of use");
                this.T20.setVisible(true);
                this.L30.setVisible(true);
-               this.L30.setText("Frekven. procesora");
+               this.L30.setText("Processor frequency");
                this.T30.setVisible(true);
                this.L40.setVisible(true);
                this.L40.setText("RAM");
                this.T40.setVisible(true);
                this.L50.setVisible(true);
-               this.L50.setText("Interná pamäť");
+               this.L50.setText("Internal storage");
                this.T50.setVisible(true);
                this.L60.setVisible(true);
-               this.L60.setText("Uhlopriečka displeja");
+               this.L60.setText("Display diagonal");
                this.T60.setVisible(true);
-           } else if (volbaCB.getSelectedIndex() == 1) {
+           } else if (choiceCB.getSelectedIndex() == 1) {
                this.setInvisibleComponents();
                this.L00.setVisible(true);
-               this.L00.setText("Značka");
+               this.L00.setText("Brand");
                this.T00.setVisible(true);
                this.L10.setVisible(true);
-               this.L10.setText("RokVyroby");
+               this.L10.setText("YearOfManufacture");
                this.T10.setVisible(true);
                this.L20.setVisible(true);
-               this.L20.setText("Doba použ. v mes.");
+               this.L20.setText("Months of use");
                this.T20.setVisible(true);
                this.L30.setVisible(true);
-               this.L30.setText("Frekven. procesora");
+               this.L30.setText("Processor frequency");
                this.T30.setVisible(true);
                this.L40.setVisible(true);
                this.L40.setText("RAM");
                this.T40.setVisible(true);
                this.L50.setVisible(true);
-               this.L50.setText("Interná pamäť");
+               this.L50.setText("Internal storage");
                this.T50.setVisible(true);
                this.L60.setVisible(true);
-               this.L60.setText("Výdrž batérie");
+               this.L60.setText("Battery life");
                this.T60.setVisible(true);
                this.L70.setVisible(true);
-               this.L70.setText("Rozlíšenie fotoap.");
+               this.L70.setText("Camera resolution");
                this.T70.setVisible(true);
-           } else if (volbaCB.getSelectedIndex() == 2) {
+           } else if (choiceCB.getSelectedIndex() == 2) {
                this.setInvisibleComponents();
                this.L00.setVisible(true);
-               this.L00.setText("Značka");
+               this.L00.setText("Brand");
                this.T00.setVisible(true);
                this.L10.setVisible(true);
-               this.L10.setText("RokVyroby");
+               this.L10.setText("YearOfManufacture");
                this.T10.setVisible(true);
                this.L20.setVisible(true);
-               this.L20.setText("Doba použ. v mes.");
+               this.L20.setText("Months of use");
                this.T20.setVisible(true);
            }
        }
-    }//GEN-LAST:event_volbaCBActionPerformed
+    }//GEN-LAST:event_choiceCBActionPerformed
     /**
-     * Nastavu podradeny combo box na zaklade nadradeneho
+     * Sets the subordinate combo box based on the parent combo box
      * @param evt 
      */
     
-    private void druhCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_druhCBActionPerformed
+    private void typeCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeCBActionPerformed
         // TODO add your handling code here:
-        if (druhCB.getSelectedIndex() == 0) {
+        if (typeCB.getSelectedIndex() == 0) {
             this.setInvisibleComponents();
-            this.volbaL.setVisible(true);
-            this.volbaL.setText("Vyberte druh vozidla");
-            this.volbaCB.setVisible(true);
-            this.volbaCB.removeAllItems();
-            this.volbaCB.insertItemAt("Auto",0);
-            this.volbaCB.insertItemAt("Motorka",1);
-            this.volbaCB.insertItemAt("Autobus",2);
-            this.volbaCB.insertItemAt("Kamion",3);
-        } else if (druhCB.getSelectedIndex() == 1) {
+            this.choiceL.setVisible(true);
+            this.choiceL.setText("Select vehicle type");
+            this.choiceCB.setVisible(true);
+            this.choiceCB.removeAllItems();
+            this.choiceCB.insertItemAt("Car",0);
+            this.choiceCB.insertItemAt("Motorcycle",1);
+            this.choiceCB.insertItemAt("Bus",2);
+            this.choiceCB.insertItemAt("Truck",3);
+        } else if (typeCB.getSelectedIndex() == 1) {
             this.setInvisibleComponents();
-            this.volbaL.setVisible(true);
-            this.volbaL.setText("Vyberte typ stroja");
-            this.volbaCB.setVisible(true);
-            this.volbaCB.removeAllItems();
-            this.volbaCB.insertItemAt("Kosačka",0);
-            this.volbaCB.insertItemAt("Krovinorez",1);
-            this.volbaCB.insertItemAt("Motorová píla",2);
-        } else if (druhCB.getSelectedIndex() == 2) {
+            this.choiceL.setVisible(true);
+            this.choiceL.setText("Select machine type");
+            this.choiceCB.setVisible(true);
+            this.choiceCB.removeAllItems();
+            this.choiceCB.insertItemAt("Lawn Mower",0);
+            this.choiceCB.insertItemAt("Brush Cutter",1);
+            this.choiceCB.insertItemAt("Chainsaw",2);
+        } else if (typeCB.getSelectedIndex() == 2) {
             this.setInvisibleComponents();
-            this.volbaL.setVisible(true);
-            this.volbaL.setText("Vyberte typ elektra");
-            this.volbaCB.setVisible(true);
-            this.volbaCB.removeAllItems();
-            this.volbaCB.insertItemAt("Počítač",0);
-            this.volbaCB.insertItemAt("Mobil",1);
-            this.volbaCB.insertItemAt("Iné",2);
+            this.choiceL.setVisible(true);
+            this.choiceL.setText("Select electronics type");
+            this.choiceCB.setVisible(true);
+            this.choiceCB.removeAllItems();
+            this.choiceCB.insertItemAt("Computer",0);
+            this.choiceCB.insertItemAt("Mobile",1);
+            this.choiceCB.insertItemAt("Other",2);
         }
-    }//GEN-LAST:event_druhCBActionPerformed
+    }//GEN-LAST:event_typeCBActionPerformed
 
     private void T10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T10ActionPerformed
         // TODO add your handling code here:
@@ -788,471 +788,471 @@ public class PredajGrafika extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_T40ActionPerformed
 
-    private void cenaTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cenaTActionPerformed
+    private void priceTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cenaTActionPerformed
+    }//GEN-LAST:event_priceTActionPerformed
 
     private void T70ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T70ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_T70ActionPerformed
 
-    private void mesiacTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesiacTActionPerformed
+    private void monthTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_mesiacTActionPerformed
+    }//GEN-LAST:event_monthTActionPerformed
 
-    private void komentarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_komentarTActionPerformed
+    private void commentTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commentTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_komentarTActionPerformed
+    }//GEN-LAST:event_commentTActionPerformed
 
-    private void mestoTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mestoTActionPerformed
+    private void cityTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_mestoTActionPerformed
+    }//GEN-LAST:event_cityTActionPerformed
 
-    private void cisloTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cisloTActionPerformed
+    private void phoneTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cisloTActionPerformed
+    }//GEN-LAST:event_phoneTActionPerformed
     /**
-     * Stalcenim tlacidla pridaj sa prejde vsetkymi textfieldami a pozbieraju sa data pre inzerat
-     * V prípade chyby, vyhodi vynimky roznych typov
-     * Po pridani okamzite databazu nanovo nahrava do suboru 
+     * Pressing the add button iterates through all text fields and collects data for the listing.
+     * In case of an error, throws exceptions of various types.
+     * After adding, immediately saves the database to a file.
      * @param evt 
      */
-    private void pridajBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajBActionPerformed
+    private void addBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBActionPerformed
         // TODO add your handling code here:
-        int vytvor = 0;
-        String znacka = "";
+        int errors = 0;
+        String brand = "";
         String model = "";
-        String karoseria = "";
-        String farba = "";
-        String palivo = "";
-        int vykon = 0;
-        int najazdeneKm = 0;
-        int rokVyroby = 0;
-        double obsahMotora = 0;
-        String emisnaTrieda = "";
-        int nosnost = 0;
-        int pocetMiest = 0;
-        int dobaPouzivania = 0;
-        int frekvencia = 0;
+        String bodyType = "";
+        String color = "";
+        String fuel = "";
+        int power = 0;
+        int drivenKm = 0;
+        int yearOfManufacture = 0;
+        double engineDisplacement = 0;
+        String emissionClass = "";
+        int loadCapacity = 0;
+        int seatCount = 0;
+        int monthsOfUse = 0;
+        int frequency = 0;
         double ram = 0;
-        double internaPamat = 0;
-        int vydrzBateria = 0;
-        int uhlopriecka = 0;  
-        int rozlisenieFotaku = 0;
-        String meno = "";
-        String priezvisko = "";
-        String mesto = "";
-        int den = 0;
-        int mesiac = 0;
-        int rok = 0;
-        int cena = 0;
-        long cislo = 0;
-        String komentar = "";
-        if (this.druhCB.getSelectedIndex() == 0) {
-            znacka = "";
+        double internalStorage = 0;
+        int batteryLife = 0;
+        int displayDiagonal = 0;  
+        int cameraResolution = 0;
+        String firstName = "";
+        String lastName = "";
+        String city = "";
+        int day = 0;
+        int month = 0;
+        int year = 0;
+        int price = 0;
+        long phone = 0;
+        String comment = "";
+        if (this.typeCB.getSelectedIndex() == 0) {
+            brand = "";
             model = "";
-            karoseria = "";
-            farba = "";
-            palivo = "";
-            vykon = 0;
-            najazdeneKm = 0;
-            rokVyroby = 0;
-            obsahMotora = 0;
-            emisnaTrieda = "";
-            nosnost = 0;
-            pocetMiest = 0;
-            dobaPouzivania = 0;
-            frekvencia = 0;
+            bodyType = "";
+            color = "";
+            fuel = "";
+            power = 0;
+            drivenKm = 0;
+            yearOfManufacture = 0;
+            engineDisplacement = 0;
+            emissionClass = "";
+            loadCapacity = 0;
+            seatCount = 0;
+            monthsOfUse = 0;
+            frequency = 0;
             ram = 0;
-            internaPamat = 0;
-            vydrzBateria = 0;
-            uhlopriecka = 0;  
-            rozlisenieFotaku = 0;
+            internalStorage = 0;
+            batteryLife = 0;
+            displayDiagonal = 0;  
+            cameraResolution = 0;
             if (true) {
-                znacka = "";
+                brand = "";
                 model = "";
-                karoseria = "";
-                farba = "";
-                palivo = "";
-                vykon = 0;
-                najazdeneKm = 0;
-                rokVyroby = 0;
-                obsahMotora = 0;
-                emisnaTrieda = "";
-                nosnost = 0;
-                pocetMiest = 0;
-                dobaPouzivania = 0;
-                frekvencia = 0;
+                bodyType = "";
+                color = "";
+                fuel = "";
+                power = 0;
+                drivenKm = 0;
+                yearOfManufacture = 0;
+                engineDisplacement = 0;
+                emissionClass = "";
+                loadCapacity = 0;
+                seatCount = 0;
+                monthsOfUse = 0;
+                frequency = 0;
                 ram = 0;
-                internaPamat = 0;
-                vydrzBateria = 0;
-                uhlopriecka = 0;  
-                rozlisenieFotaku = 0;
+                internalStorage = 0;
+                batteryLife = 0;
+                displayDiagonal = 0;  
+                cameraResolution = 0;
                 if (!this.T00.getText().isEmpty()) {
-                    znacka = this.T00.getText();
+                    brand = this.T00.getText();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Nevyhovujúca značka");
-                    vytvor++;       
+                    JOptionPane.showMessageDialog(null, "Invalid brand");
+                    errors++;       
                 }
                 if (!this.T10.getText().isEmpty()){
                     model = this.T10.getText();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Nevyhovujúci model");
-                    vytvor++;
+                    JOptionPane.showMessageDialog(null, "Invalid model");
+                    errors++;
                 } 
                 try {
-                    vykon = Integer.parseInt(this.T20.getText());
-                    if(vykon < 0) {
-                        vykon = Integer.parseInt("zle");
+                    power = Integer.parseInt(this.T20.getText());
+                    if(power < 0) {
+                        power = Integer.parseInt("bad");
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Zle zadaný výkon");
-                    vytvor++;    
+                    JOptionPane.showMessageDialog(null, "Incorrectly entered power");
+                    errors++;    
                 }
                 try {
-                    rokVyroby = Integer.parseInt(this.T30.getText());
-                    if(rokVyroby < 0) {
-                        rokVyroby = Integer.parseInt("zle");
+                    yearOfManufacture = Integer.parseInt(this.T30.getText());
+                    if(yearOfManufacture < 0) {
+                        yearOfManufacture = Integer.parseInt("bad");
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Zle zadaný rok výroby");
-                    vytvor++;    
+                    JOptionPane.showMessageDialog(null, "Incorrectly entered year of manufacture");
+                    errors++;    
                 }
                 try {
-                    obsahMotora = Double.parseDouble(this.T40.getText());
-                    if(obsahMotora < 0) {
-                        obsahMotora = Double.parseDouble("zle");
+                    engineDisplacement = Double.parseDouble(this.T40.getText());
+                    if(engineDisplacement < 0) {
+                        engineDisplacement = Double.parseDouble("bad");
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Zle zadaný obsah motora");
-                    vytvor++;    
+                    JOptionPane.showMessageDialog(null, "Incorrectly entered engine displacement");
+                    errors++;    
                 }
                 try {
-                    najazdeneKm = Integer.parseInt(this.T50.getText());
-                    if(najazdeneKm < 0) {
-                        najazdeneKm = Integer.parseInt("zle");
+                    drivenKm = Integer.parseInt(this.T50.getText());
+                    if(drivenKm < 0) {
+                        drivenKm = Integer.parseInt("bad");
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Zle zadané najazdené kilometre");
-                    vytvor++;    
+                    JOptionPane.showMessageDialog(null, "Incorrectly entered driven kilometres");
+                    errors++;    
                 }
                 if (!this.T60.getText().isEmpty()){
-                    karoseria = this.T60.getText();
+                    bodyType = this.T60.getText();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Nevyhovujúca karoséria");
-                    vytvor++;
+                    JOptionPane.showMessageDialog(null, "Invalid body type");
+                    errors++;
                 }
                 if (!this.T70.getText().isEmpty()){
-                    farba = this.T70.getText();
+                    color = this.T70.getText();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Nevyhovujúca farba");
-                    vytvor++;
+                    JOptionPane.showMessageDialog(null, "Invalid color");
+                    errors++;
                 }
                 if (!this.T80.getText().isEmpty()){
-                    palivo = this.T80.getText();
+                    fuel = this.T80.getText();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Nevyhovujúce palivo");
-                    vytvor++;
+                    JOptionPane.showMessageDialog(null, "Invalid fuel");
+                    errors++;
                 }  
-                if (this.volbaCB.getSelectedIndex() == 2) {
+                if (this.choiceCB.getSelectedIndex() == 2) {
                     if (!this.T01.getText().isEmpty()){
-                        emisnaTrieda = this.T01.getText();
+                        emissionClass = this.T01.getText();
                     } else {
-                        JOptionPane.showMessageDialog(null, "Nevyhovujúca emisná trieda");
-                        vytvor++;
+                        JOptionPane.showMessageDialog(null, "Invalid emission class");
+                        errors++;
                     }
                     try {
-                        pocetMiest = Integer.parseInt(this.T11.getText());
-                        if(pocetMiest < 0) {
-                            pocetMiest = Integer.parseInt("zle");
+                        seatCount = Integer.parseInt(this.T11.getText());
+                        if(seatCount < 0) {
+                            seatCount = Integer.parseInt("bad");
                         }
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Zle zadaný počet miest");
-                        vytvor++;    
+                        JOptionPane.showMessageDialog(null, "Incorrectly entered seat count");
+                        errors++;    
                     }
-                } else if (this.volbaCB.getSelectedIndex() == 3) {
+                } else if (this.choiceCB.getSelectedIndex() == 3) {
                     if (!this.T01.getText().isEmpty()){
-                        emisnaTrieda = this.T01.getText();
+                        emissionClass = this.T01.getText();
                     } else {
-                        JOptionPane.showMessageDialog(null, "Nevyhovujúca emisná trieda");
-                        vytvor++;
+                        JOptionPane.showMessageDialog(null, "Invalid emission class");
+                        errors++;
                     }
                     try {
-                        nosnost = Integer.parseInt(this.T11.getText());
-                        if(nosnost < 0) {
-                            nosnost = Integer.parseInt("zle");
+                        loadCapacity = Integer.parseInt(this.T11.getText());
+                        if(loadCapacity < 0) {
+                            loadCapacity = Integer.parseInt("bad");
                         }
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Zle zadaná nosnosť");
-                        vytvor++;    
+                        JOptionPane.showMessageDialog(null, "Incorrectly entered load capacity");
+                        errors++;    
                     } 
                 }
             }
-        } else if (this.druhCB.getSelectedIndex() == 1) {
-            znacka = "";
+        } else if (this.typeCB.getSelectedIndex() == 1) {
+            brand = "";
             model = "";
-            karoseria = "";
-            farba = "";
-            palivo = "";
-            vykon = 0;
-            najazdeneKm = 0;
-            rokVyroby = 0;
-            obsahMotora = 0;
-            emisnaTrieda = "";
-            nosnost = 0;
-            pocetMiest = 0;
-            dobaPouzivania = 0;
-            frekvencia = 0;
+            bodyType = "";
+            color = "";
+            fuel = "";
+            power = 0;
+            drivenKm = 0;
+            yearOfManufacture = 0;
+            engineDisplacement = 0;
+            emissionClass = "";
+            loadCapacity = 0;
+            seatCount = 0;
+            monthsOfUse = 0;
+            frequency = 0;
             ram = 0;
-            internaPamat = 0;
-            vydrzBateria = 0;
-            uhlopriecka = 0;  
-            rozlisenieFotaku = 0;
+            internalStorage = 0;
+            batteryLife = 0;
+            displayDiagonal = 0;  
+            cameraResolution = 0;
             if (!this.T00.getText().isEmpty()) {
-                znacka = this.T00.getText();
+                brand = this.T00.getText();
             } else {
-                JOptionPane.showMessageDialog(null, "Nevyhovujúca značka");
-                vytvor++;       
+                JOptionPane.showMessageDialog(null, "Invalid brand");
+                errors++;       
             }
             try {
-                dobaPouzivania = Integer.parseInt(this.T10.getText());
-                if(dobaPouzivania < 0) {
-                    dobaPouzivania = Integer.parseInt("zle");
+                monthsOfUse = Integer.parseInt(this.T10.getText());
+                if(monthsOfUse < 0) {
+                    monthsOfUse = Integer.parseInt("bad");
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Zle zadaná doba používania");
-                vytvor++;    
+                JOptionPane.showMessageDialog(null, "Incorrectly entered months of use");
+                errors++;    
             }
             try {
-                vykon = Integer.parseInt(this.T20.getText());
-                if(vykon < 0) {
-                    vykon = Integer.parseInt("zle");
+                power = Integer.parseInt(this.T20.getText());
+                if(power < 0) {
+                    power = Integer.parseInt("bad");
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Zle zadaný príkon");
-                vytvor++;    
+                JOptionPane.showMessageDialog(null, "Incorrectly entered power input");
+                errors++;    
             }
             try {
-                rokVyroby = Integer.parseInt(this.T30.getText());
-                if(rokVyroby < 0) {
-                    rokVyroby = Integer.parseInt("zle");
+                yearOfManufacture = Integer.parseInt(this.T30.getText());
+                if(yearOfManufacture < 0) {
+                    yearOfManufacture = Integer.parseInt("bad");
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Zle zadaný rok výroby");
-                vytvor++;    
+                JOptionPane.showMessageDialog(null, "Incorrectly entered year of manufacture");
+                errors++;    
             }
             try {
-                obsahMotora = Double.parseDouble(this.T40.getText());
-                if(obsahMotora < 0) {
-                    obsahMotora = Double.parseDouble("zle");
+                engineDisplacement = Double.parseDouble(this.T40.getText());
+                if(engineDisplacement < 0) {
+                    engineDisplacement = Double.parseDouble("bad");
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Zle zadaný objem motora");
-                vytvor++;    
+                JOptionPane.showMessageDialog(null, "Incorrectly entered engine displacement");
+                errors++;    
             }
-        } else if (druhCB.getSelectedIndex() == 2) {
-            znacka = "";
+        } else if (typeCB.getSelectedIndex() == 2) {
+            brand = "";
             model = "";
-            karoseria = "";
-            farba = "";
-            palivo = "";
-            vykon = 0;
-            najazdeneKm = 0;
-            rokVyroby = 0;
-            obsahMotora = 0;
-            emisnaTrieda = "";
-            nosnost = 0;
-            pocetMiest = 0;
-            dobaPouzivania = 0;
-            frekvencia = 0;
+            bodyType = "";
+            color = "";
+            fuel = "";
+            power = 0;
+            drivenKm = 0;
+            yearOfManufacture = 0;
+            engineDisplacement = 0;
+            emissionClass = "";
+            loadCapacity = 0;
+            seatCount = 0;
+            monthsOfUse = 0;
+            frequency = 0;
             ram = 0;
-            internaPamat = 0;
-            vydrzBateria = 0;
-            uhlopriecka = 0;  
-            rozlisenieFotaku = 0;
+            internalStorage = 0;
+            batteryLife = 0;
+            displayDiagonal = 0;  
+            cameraResolution = 0;
             if (!this.T00.getText().isEmpty()) {
-                znacka = this.T00.getText();
+                brand = this.T00.getText();
             } else {
-                JOptionPane.showMessageDialog(null, "Nevyhovujúca značka");
-                vytvor++;       
+                JOptionPane.showMessageDialog(null, "Invalid brand");
+                errors++;       
             }
             try {
-                rokVyroby = Integer.parseInt(this.T10.getText());
-                if(rokVyroby < 0) {
-                    rokVyroby = Integer.parseInt("zle");
+                yearOfManufacture = Integer.parseInt(this.T10.getText());
+                if(yearOfManufacture < 0) {
+                    yearOfManufacture = Integer.parseInt("bad");
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Zle zadaný rok výroby");
-                vytvor++;    
+                JOptionPane.showMessageDialog(null, "Incorrectly entered year of manufacture");
+                errors++;    
             }
             try {
-                dobaPouzivania = Integer.parseInt(this.T20.getText());
-                if(dobaPouzivania < 0) {
-                    dobaPouzivania = Integer.parseInt("zle");
+                monthsOfUse = Integer.parseInt(this.T20.getText());
+                if(monthsOfUse < 0) {
+                    monthsOfUse = Integer.parseInt("bad");
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Zle zadaná doba používania");
-                vytvor++;    
+                JOptionPane.showMessageDialog(null, "Incorrectly entered months of use");
+                errors++;    
             } 
-            if (volbaCB.getSelectedIndex() == 0 || volbaCB.getSelectedIndex() == 1) {
+            if (choiceCB.getSelectedIndex() == 0 || choiceCB.getSelectedIndex() == 1) {
                 try {
-                    frekvencia = Integer.parseInt(this.T30.getText());
-                    if(frekvencia < 0) {
-                     frekvencia = Integer.parseInt("zle");
+                    frequency = Integer.parseInt(this.T30.getText());
+                    if(frequency < 0) {
+                     frequency = Integer.parseInt("bad");
                     }   
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Zle zadaná frekvencia procesora");
-                    vytvor++;    
+                    JOptionPane.showMessageDialog(null, "Incorrectly entered processor frequency");
+                    errors++;    
                 }
                 try {
                     ram = Double.parseDouble(this.T40.getText());
                     if(ram < 0) {
-                     ram = Double.parseDouble("zle");
+                     ram = Double.parseDouble("bad");
                     }   
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Zle zadaná ram");
-                    vytvor++;    
+                    JOptionPane.showMessageDialog(null, "Incorrectly entered ram");
+                    errors++;    
                 }
                 try {
-                    internaPamat = Double.parseDouble(this.T50.getText());
-                    if(internaPamat < 0) {
-                     internaPamat = Double.parseDouble("zle");
+                    internalStorage = Double.parseDouble(this.T50.getText());
+                    if(internalStorage < 0) {
+                     internalStorage = Double.parseDouble("bad");
                     }   
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Zle zadaná interná pamäť");
-                    vytvor++;    
+                    JOptionPane.showMessageDialog(null, "Incorrectly entered internal storage");
+                    errors++;    
                 }
-                if (volbaCB.getSelectedIndex() == 0) {
+                if (choiceCB.getSelectedIndex() == 0) {
                     try {
-                        uhlopriecka = Integer.parseInt(this.T60.getText());
-                        if(uhlopriecka < 0) {
-                         uhlopriecka = Integer.parseInt("zle");
+                        displayDiagonal = Integer.parseInt(this.T60.getText());
+                        if(displayDiagonal < 0) {
+                         displayDiagonal = Integer.parseInt("bad");
                         }   
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Zle zadaná uhlopriečka");
-                        vytvor++;    
+                        JOptionPane.showMessageDialog(null, "Incorrectly entered display diagonal");
+                        errors++;    
                     }
-                } else if (volbaCB.getSelectedIndex() == 1) {
+                } else if (choiceCB.getSelectedIndex() == 1) {
                     try {
-                        vydrzBateria = Integer.parseInt(this.T60.getText());
-                        if(vydrzBateria < 0) {
-                         vydrzBateria = Integer.parseInt("zle");
+                        batteryLife = Integer.parseInt(this.T60.getText());
+                        if(batteryLife < 0) {
+                         batteryLife = Integer.parseInt("bad");
                         }   
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Zle zadaná výdrž batérie");
-                        vytvor++;    
+                        JOptionPane.showMessageDialog(null, "Incorrectly entered battery life");
+                        errors++;    
                     }
                     try {
-                        rozlisenieFotaku = Integer.parseInt(this.T70.getText());
-                        if (rozlisenieFotaku < 0) {
-                         rozlisenieFotaku = Integer.parseInt("zle");
+                        cameraResolution = Integer.parseInt(this.T70.getText());
+                        if (cameraResolution < 0) {
+                         cameraResolution = Integer.parseInt("bad");
                         }   
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Zle zadaná výdrž batérie");
-                        vytvor++;    
+                        JOptionPane.showMessageDialog(null, "Incorrectly entered battery life");
+                        errors++;    
                     }
                 }
             }
         }
-            if (!this.menoT.getText().isEmpty()) {
-                meno = this.menoT.getText();
+            if (!this.firstNameT.getText().isEmpty()) {
+                firstName = this.firstNameT.getText();
             } else {
-                JOptionPane.showMessageDialog(null, "Zlé meno");
-                vytvor++;
+                JOptionPane.showMessageDialog(null, "Invalid first name");
+                errors++;
             }
-            if (!this.priezviskoT.getText().isEmpty()) {
-                priezvisko = this.priezviskoT.getText();
+            if (!this.lastNameT.getText().isEmpty()) {
+                lastName = this.lastNameT.getText();
             } else {
-                JOptionPane.showMessageDialog(null, "Zlé priezvisko");
-                vytvor++;
+                JOptionPane.showMessageDialog(null, "Invalid last name");
+                errors++;
             }
-            if (!this.mestoT.getText().isEmpty()) {
-                mesto = this.mestoT.getText();
+            if (!this.cityT.getText().isEmpty()) {
+                city = this.cityT.getText();
             } else {
-                JOptionPane.showMessageDialog(null, "Zlé mesto");
-                vytvor++;
+                JOptionPane.showMessageDialog(null, "Invalid city");
+                errors++;
             }
             try {
-                den = Integer.parseInt(this.denT.getText());
-                if(den < 0 || den > 31) {
-                    den = Integer.parseInt("zle");
+                day = Integer.parseInt(this.dayT.getText());
+                if(day < 0 || day > 31) {
+                    day = Integer.parseInt("bad");
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Zle zadaný deň");
-                vytvor++;    
+                JOptionPane.showMessageDialog(null, "Incorrectly entered day");
+                errors++;    
             }
             try {
-                mesiac = Integer.parseInt(this.mesiacT.getText());
-                if(mesiac < 0 || mesiac > 12) {
-                    mesiac = Integer.parseInt("zle");
+                month = Integer.parseInt(this.monthT.getText());
+                if(month < 0 || month > 12) {
+                    month = Integer.parseInt("bad");
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Zle zadaný mesiac");
-                vytvor++;    
+                JOptionPane.showMessageDialog(null, "Incorrectly entered month");
+                errors++;    
             }
             try {
-                rok = Integer.parseInt(this.rokT.getText());
-                if(rok < 0) {
-                    rok = Integer.parseInt("zle");
+                year = Integer.parseInt(this.yearT.getText());
+                if(year < 0) {
+                    year = Integer.parseInt("bad");
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Zle zadaný rok");
-                vytvor++;    
+                JOptionPane.showMessageDialog(null, "Incorrectly entered year");
+                errors++;    
             }
             try {
-                cena = Integer.parseInt(this.cenaT.getText());
-                if(cena < 0) {
-                    cena = Integer.parseInt("zle");
+                price = Integer.parseInt(this.priceT.getText());
+                if(price < 0) {
+                    price = Integer.parseInt("bad");
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Zle zadaný cena");
-                vytvor++;    
+                JOptionPane.showMessageDialog(null, "Incorrectly entered price");
+                errors++;    
             }
             try {
-                cislo = Long.parseLong(this.cisloT.getText());
-                if(cislo < 0 ) {
-                    cislo = Long.parseLong("zle");
+                phone = Long.parseLong(this.phoneT.getText());
+                if(phone < 0 ) {
+                    phone = Long.parseLong("bad");
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Zle zadané číslo");
-                vytvor++;    
+                JOptionPane.showMessageDialog(null, "Incorrectly entered phone number");
+                errors++;    
             }
-            komentar = this.komentarT.getText();
-            INaPredaj pridavany = null;
-            if (vytvor == 0) {
-                if (volbaCB.getSelectedItem().equals("Auto")) {
-                    pridavany = new Auto(new Osoba(meno,priezvisko,den,mesiac,rok,mesto,cislo),"Auto",znacka,model,vykon,rokVyroby,obsahMotora,najazdeneKm,karoseria,farba,cena,palivo,komentar);
-                } else if (volbaCB.getSelectedItem().equals("Motorka")) {
-                    pridavany = new Motorka(new Osoba(meno,priezvisko,den,mesiac,rok,mesto,cislo),"Motorka",znacka,model,vykon,rokVyroby,obsahMotora,najazdeneKm,karoseria,farba,cena,palivo,komentar);
-                } else if (volbaCB.getSelectedItem().equals("Autobus")) {
-                    pridavany = new Autobus(new Osoba(meno,priezvisko,den,mesiac,rok,mesto,cislo),"Autobus",znacka,model,vykon,rokVyroby,obsahMotora,najazdeneKm,karoseria,farba,cena,palivo ,pocetMiest ,emisnaTrieda,komentar);
-                } else if (volbaCB.getSelectedItem().equals("Kamion")) {
-                    pridavany = new Kamion(new Osoba(meno,priezvisko,den,mesiac,rok,mesto,cislo),"Kamion",znacka,model,vykon,rokVyroby,obsahMotora,najazdeneKm,karoseria,farba,cena, palivo, nosnost, emisnaTrieda,komentar);
-                } else if (volbaCB.getSelectedItem().equals("Kosačka")) {
-                    pridavany = new Kosacka(new Osoba(meno,priezvisko,den,mesiac,rok,mesto,cislo),"Kosacka",vykon,obsahMotora,znacka,rokVyroby,dobaPouzivania,cena,komentar);
-                } else if (volbaCB.getSelectedItem().equals("Krovinorez")) {
-                    pridavany = new Krovinorez(new Osoba(meno,priezvisko,den,mesiac,rok,mesto,cislo),"Krovinorez",vykon,obsahMotora,znacka,rokVyroby,dobaPouzivania,cena,komentar);
-                } else if (volbaCB.getSelectedItem().equals("Motorová píla")) {
-                    pridavany = new MotorovaPila(new Osoba(meno,priezvisko,den,mesiac,rok,mesto,cislo),"MotorovaPila",vykon,obsahMotora,znacka,rokVyroby,dobaPouzivania,cena,komentar);
-                } else if (volbaCB.getSelectedItem().equals("Počítač")) {
-                    pridavany = new Pocitac(new Osoba(meno,priezvisko,den,mesiac,rok,mesto,cislo),"Pocitac",znacka,rokVyroby,dobaPouzivania,cena,frekvencia,ram,internaPamat,uhlopriecka,komentar);
-                } else if (volbaCB.getSelectedItem().equals("Mobil")) {
-                    pridavany = new Mobil(new Osoba(meno,priezvisko,den,mesiac,rok,mesto,cislo),"Mobil",znacka,rokVyroby,dobaPouzivania,cena,frekvencia,ram,internaPamat,vydrzBateria,rozlisenieFotaku,komentar);
-                } else if (volbaCB.getSelectedItem().equals("Iné")) {
-                    pridavany = new Elektronika(new Osoba(meno,priezvisko,den,mesiac,rok,mesto,cislo),"Elektronika",znacka,rokVyroby,dobaPouzivania,cena,komentar);
+            comment = this.commentT.getText();
+            IForSale newListing = null;
+            if (errors == 0) {
+                if (choiceCB.getSelectedItem().equals("Car")) {
+                    newListing = new Car(new Person(firstName,lastName,day,month,year,city,phone),"Car",brand,model,power,yearOfManufacture,engineDisplacement,drivenKm,bodyType,color,price,fuel,comment);
+                } else if (choiceCB.getSelectedItem().equals("Motorcycle")) {
+                    newListing = new Motorcycle(new Person(firstName,lastName,day,month,year,city,phone),"Motorcycle",brand,model,power,yearOfManufacture,engineDisplacement,drivenKm,bodyType,color,price,fuel,comment);
+                } else if (choiceCB.getSelectedItem().equals("Bus")) {
+                    newListing = new Bus(new Person(firstName,lastName,day,month,year,city,phone),"Bus",brand,model,power,yearOfManufacture,engineDisplacement,drivenKm,bodyType,color,price,fuel ,seatCount ,emissionClass,comment);
+                } else if (choiceCB.getSelectedItem().equals("Truck")) {
+                    newListing = new Truck(new Person(firstName,lastName,day,month,year,city,phone),"Truck",brand,model,power,yearOfManufacture,engineDisplacement,drivenKm,bodyType,color,price, fuel, loadCapacity, emissionClass,comment);
+                } else if (choiceCB.getSelectedItem().equals("Lawn Mower")) {
+                    newListing = new LawnMower(new Person(firstName,lastName,day,month,year,city,phone),"LawnMower",power,engineDisplacement,brand,yearOfManufacture,monthsOfUse,price,comment);
+                } else if (choiceCB.getSelectedItem().equals("Brush Cutter")) {
+                    newListing = new BrushCutter(new Person(firstName,lastName,day,month,year,city,phone),"BrushCutter",power,engineDisplacement,brand,yearOfManufacture,monthsOfUse,price,comment);
+                } else if (choiceCB.getSelectedItem().equals("Chainsaw")) {
+                    newListing = new Chainsaw(new Person(firstName,lastName,day,month,year,city,phone),"Chainsaw",power,engineDisplacement,brand,yearOfManufacture,monthsOfUse,price,comment);
+                } else if (choiceCB.getSelectedItem().equals("Computer")) {
+                    newListing = new Computer(new Person(firstName,lastName,day,month,year,city,phone),"Computer",brand,yearOfManufacture,monthsOfUse,price,frequency,ram,internalStorage,displayDiagonal,comment);
+                } else if (choiceCB.getSelectedItem().equals("Mobile")) {
+                    newListing = new Mobile(new Person(firstName,lastName,day,month,year,city,phone),"Mobile",brand,yearOfManufacture,monthsOfUse,price,frequency,ram,internalStorage,batteryLife,cameraResolution,comment);
+                } else if (choiceCB.getSelectedItem().equals("Other")) {
+                    newListing = new Electronics(new Person(firstName,lastName,day,month,year,city,phone),"Electronics",brand,yearOfManufacture,monthsOfUse,price,comment);
                 } 
-                int reply = JOptionPane.showConfirmDialog(null, pridavany.toString(), "Naozaj chcete pridať inzerát?", JOptionPane.YES_NO_OPTION);
+                int reply = JOptionPane.showConfirmDialog(null, newListing.toString(), "Do you really want to add the listing?", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
-                    this.inz.pridajInzerat(pridavany);
+                    this.listing.addListing(newListing);
                     try {
-                        this.inz.zapisDatabazu();
+                        this.listing.saveDatabase();
                     } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "Pri pridávaní nastala chyba, skúste to znova");
-                        this.inz.odoberInzerat(this.inz.dajPocet() - 1);
+                        JOptionPane.showMessageDialog(null, "An error occurred while adding, please try again");
+                        this.listing.removeListing(this.listing.getCount() - 1);
                     }
                 }
             }
-    }//GEN-LAST:event_pridajBActionPerformed
+    }//GEN-LAST:event_addBActionPerformed
 
     private void T00ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T00ActionPerformed
         // TODO add your handling code here:
@@ -1280,20 +1280,20 @@ public class PredajGrafika extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PredajGrafika.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleGraphics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PredajGrafika.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleGraphics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PredajGrafika.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleGraphics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PredajGrafika.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleGraphics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PredajGrafika(new Inzerat()).setVisible(true);
+                new SaleGraphics(new Listing()).setVisible(true);
             }
         });
     }
@@ -1321,11 +1321,11 @@ public class PredajGrafika extends javax.swing.JFrame {
     private javax.swing.JTextField T60;
     private javax.swing.JTextField T70;
     private javax.swing.JTextField T80;
-    private javax.swing.JTextField cenaT;
-    private javax.swing.JTextField cisloT;
-    private javax.swing.JTextField denT;
-    private javax.swing.JComboBox<String> druhCB;
-    private javax.swing.JLabel druhL;
+    private javax.swing.JTextField priceT;
+    private javax.swing.JTextField phoneT;
+    private javax.swing.JTextField dayT;
+    private javax.swing.JComboBox<String> typeCB;
+    private javax.swing.JLabel typeL;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1339,14 +1339,14 @@ public class PredajGrafika extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JTextField komentarT;
-    private javax.swing.JTextField menoT;
-    private javax.swing.JTextField mesiacT;
-    private javax.swing.JTextField mestoT;
-    private javax.swing.JButton pridajB;
-    private javax.swing.JTextField priezviskoT;
-    private javax.swing.JTextField rokT;
-    private javax.swing.JComboBox<String> volbaCB;
-    private javax.swing.JLabel volbaL;
+    private javax.swing.JTextField commentT;
+    private javax.swing.JTextField firstNameT;
+    private javax.swing.JTextField monthT;
+    private javax.swing.JTextField cityT;
+    private javax.swing.JButton addB;
+    private javax.swing.JTextField lastNameT;
+    private javax.swing.JTextField yearT;
+    private javax.swing.JComboBox<String> choiceCB;
+    private javax.swing.JLabel choiceL;
     // End of variables declaration//GEN-END:variables
 }
