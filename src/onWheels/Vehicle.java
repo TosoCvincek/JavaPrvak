@@ -71,8 +71,8 @@ public class Vehicle implements IForSale {
     public String toString() {
         String text = this.vehicleType + " " + this.brand + " " + this.model + " " + this.bodyType + ", " + this.fuel + ", " + this.engineDisplacement + ", " + this.color + ", manufactured in year " + this.yearOfManufacture; 
         String text2 = " with power " + this.power + "KW, with " + this.drivenKm + "km driven, offered by: " + this.owner.toString() + " for price " + this.price + "€\n";
-        String komentar1 = "User comment: " + this.comment;
-        return text + text2 + komentar1;
+        String commentLine = "User comment: " + this.comment;
+        return text + text2 + commentLine;
     }
     
     /**

@@ -98,21 +98,21 @@ public class Date {
     } 
  
     public String getTomorrow() {
-        int den = this.day; 
-        int mesiac = this.month;
-        int rok = this.year;
-        if (den < this.getDaysInMonth() ) {
-            den = den + 1;
-        } else if (den == this.getDaysInMonth() ) {
-            den = 1;
-            if (mesiac < 12) {
-                mesiac = mesiac + 1;
+        int nextDay = this.day; 
+        int nextMonth = this.month;
+        int nextYear = this.year;
+        if (nextDay < this.getDaysInMonth() ) {
+            nextDay = nextDay + 1;
+        } else if (nextDay == this.getDaysInMonth() ) {
+            nextDay = 1;
+            if (nextMonth < 12) {
+                nextMonth = nextMonth + 1;
             } else {
-                mesiac = 1;
-                rok = rok + 1;
+                nextMonth = 1;
+                nextYear = nextYear + 1;
             }
         }
-        return ("Tomorrow is: " + den + "." + mesiac + "." + rok);
+        return ("Tomorrow is: " + nextDay + "." + nextMonth + "." + nextYear);
     }
     
     public int getDay() {

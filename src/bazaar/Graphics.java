@@ -22,16 +22,16 @@ public class Graphics extends javax.swing.JFrame {
     private Listing database;
     public Graphics() throws IOException {
         this.initComponents();
-        this.dateLB.setText("Dátum: " + new Date().toString());
+        this.dateLB.setText("Date: " + new Date().toString());
         this.database = new Listing();
         try {
             this.database.loadDatabase();
-            this.loadStatusL.setText("Databáza úspešné načítaná!");
+            this.loadStatusL.setText("Database loaded successfully!");
         } catch (FileNotFoundException ex) {
-            this.loadStatusL.setText("Nepodarilo sa načítať databázu, skúste znova. Ak sa tým problém nevyrieši, kontaktujte správcu Toša.");
-            this.exL.setText("Chyba: " +  ex.getMessage());
+            this.loadStatusL.setText("Failed to load database, please try again. If the problem persists, contact the administrator.");
+            this.exL.setText("Error: " +  ex.getMessage());
         }
-        this.setTitle("Bazár");
+        this.setTitle("Bazaar");
             
     }
 
@@ -63,24 +63,24 @@ public class Graphics extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Dobrý deň. Vitajte v mojom malom bazáre. Pre pokračovanie zvoľte možnosť v menu.");
+        jLabel1.setText("Good day. Welcome to my small bazaar. Please choose an option from the menu to continue.");
         jLabel1.setToolTipText("");
 
-        purchaseBT.setText(" Nákup v bazári");
+        purchaseBT.setText(" Purchase");
         purchaseBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 purchaseBTActionPerformed(evt);
             }
         });
 
-        saleBT.setText("Pridať inzerát ");
+        saleBT.setText("Add Listing ");
         saleBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saleBTActionPerformed(evt);
             }
         });
 
-        exitBT.setText("Koniec");
+        exitBT.setText("Exit");
         exitBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitBTActionPerformed(evt);
@@ -157,7 +157,7 @@ public class Graphics extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        int reply = JOptionPane.showConfirmDialog(null, "Naozaj chceš skončiť?", "Koniec", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, "Do you really want to quit?", "Exit", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
@@ -165,7 +165,7 @@ public class Graphics extends javax.swing.JFrame {
 
     private void exitBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTActionPerformed
         // TODO add your handling code here:
-        int reply = JOptionPane.showConfirmDialog(null, "Naozaj chceš skončiť?", "Koniec", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, "Do you really want to quit?", "Exit", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             System.exit(0);
         }

@@ -34,8 +34,8 @@ public class ElectronicDevice implements IForSale {
     public String toString() {
         String text = this.type + " " + this.brand + ", manufactured in year " + this.yearOfManufacture; 
         String text2 = " used by previous owner for " + this.monthsOfUse + " months, offered by: " + this.owner.toString() + " for price " + this.price + "€\n";
-        String komentar1 = "User comment: " + this.comment;
-        return text + text2 + komentar1;
+        String commentLine = "User comment: " + this.comment;
+        return text + text2 + commentLine;
     }
     
     public void print() {

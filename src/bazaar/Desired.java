@@ -29,9 +29,9 @@ public class Desired extends javax.swing.JFrame {
      * Creates new form Desired
      */
     /**
-     * Konstruktor automaticky generuje buttony a priradzuje im listenery
-     * Po stlacenie jednotlivych buttonov sa podhodi otazka k kúpe
-     * Ak stlacime ano, inzerat sa odstrani z databazy a databaza sa nanovo nahra do suboru 
+     * Constructor automatically generates buttons and assigns listeners to them.
+     * When a button is pressed, a purchase confirmation dialog is shown.
+     * If confirmed, the listing is removed from the database and the database is saved to a file.
      * @param desired
      * @param listing 
      */
@@ -43,12 +43,12 @@ public class Desired extends javax.swing.JFrame {
         this.buttons = new JButton[this.desired.size()];
         System.out.println(this.listing.toString());
         System.out.println(this.desired);
-        JFrame okno = new JFrame("Výber inzerátu");
-        okno.setVisible(true);
+        JFrame window = new JFrame("Listing Selection");
+        window.setVisible(true);
         if (this.desired.size() != 0) {
             for (int i = 0; i < this.buttons.length; i++) {
                 JButton btn = (new JButton(this.desired.get(i).toString()));
-                okno.add(btn);
+                window.add(btn);
                 btn.addActionListener(new java.awt.event.ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -56,16 +56,16 @@ public class Desired extends javax.swing.JFrame {
                         for (int i = 0; i < listing.getCount(); i++) {
                             if (true) {
                                 if (listing.getListing(i).toString().equals(listingText)) {
-                                    int reply = JOptionPane.showConfirmDialog(null, listingText + "\n" + "Naozaj chceš kúpiť tento inzerát?", "Záväzná kúpa", JOptionPane.YES_NO_OPTION);
+                                    int reply = JOptionPane.showConfirmDialog(null, listingText + "\n" + "Do you really want to buy this listing?", "Binding Purchase", JOptionPane.YES_NO_OPTION);
                                     if (reply == JOptionPane.YES_OPTION) {
                                         listing.removeListing(i);
-                                        JOptionPane.showMessageDialog(null, "Predané, ďakujeme za transakciu!");
+                                        JOptionPane.showMessageDialog(null, "Sold, thank you for the transaction!");
                                         try {
                                             listing.saveDatabase();
-                                            okno.dispose();
+                                            window.dispose();
                                         } catch (IOException ex) {
-                                            JOptionPane.showMessageDialog(null, "Nastala chyba, je nám ľúto");
-                                            okno.dispose();
+                                            JOptionPane.showMessageDialog(null, "An error occurred, we apologize.");
+                                            window.dispose();
                                         }
                                     }
                                 }
@@ -76,19 +76,19 @@ public class Desired extends javax.swing.JFrame {
                 );
                 this.buttons[i] = btn;   
             }
-            okno.setLayout(new GridLayout(this.desired.size(), 0));
-            okno.pack();
+            window.setLayout(new GridLayout(this.desired.size(), 0));
+            window.pack();
         } else {
-            okno.add(new Label("Žiadne inzeráty nevyhovujú Vaším podmienkam."));
-            okno.pack();
+            window.add(new Label("No listings match your conditions."));
+            window.pack();
         }
-        okno.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        okno.addWindowListener (new WindowAdapter() { 
+        window.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        window.addWindowListener (new WindowAdapter() { 
             @Override 
             public void windowClosing(WindowEvent e) {
-                int reply = JOptionPane.showConfirmDialog(null, "Naozaj chceš skončiť, tvoje dáta sa stratia", "Koniec", JOptionPane.YES_NO_OPTION);
+                int reply = JOptionPane.showConfirmDialog(null, "Do you really want to quit? Your data will be lost.", "Exit", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
-                    okno.dispose();
+                    window.dispose();
                 }
             }
         }

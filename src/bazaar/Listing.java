@@ -62,288 +62,287 @@ public class Listing {
     
     @Override
     public String toString() {
-        String result = "Vypis: \n";
+        String result = "Listing: \n";
         for (IForSale current : this.database) {
             result = result + current.toString() + "\n";
         }
         return result;
     }
     /**
-     * Metóda zapisuje databázu do binárneho súboru, jednotlivo, po prvkoch arraylistu.
-     * V prípade problémov vyhodí výnimku pomocou JOptionPane
+     * Method writes the database to a binary file, element by element from the ArrayList.
+     * In case of problems, throws an exception using JOptionPane
      *
      * @throws java.io.IOException
     */
     public void saveDatabase() throws IOException {
-        boolean koniec = false;
-        DataOutputStream zapisovac = null;
+        DataOutputStream writer = null;
         try {
-            File subor = new File ("databaza.bin");
-            FileOutputStream zapis = new FileOutputStream(subor);
-            zapisovac = new DataOutputStream(zapis);
+            File file = new File ("database.bin");
+            FileOutputStream output = new FileOutputStream(file);
+            writer = new DataOutputStream(output);
             for (IForSale current: this.database) {
                 if (current instanceof Vehicle) {
                     if (current instanceof Car) {
-                        zapisovac.writeUTF("Auto");
-                        zapisovac.writeUTF(((Vehicle)current).getOwner().getFirstName());
-                        zapisovac.writeUTF(((Vehicle)current).getOwner().getLastName());
-                        zapisovac.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getDay());
-                        zapisovac.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getMonth());
-                        zapisovac.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getYear());
-                        zapisovac.writeUTF(((Vehicle)current).getOwner().getLocation().getCity());
-                        zapisovac.writeLong(((Vehicle)current).getOwner().getLocation().getPhone());
-                        zapisovac.writeUTF(((Vehicle)current).getVehicleType());
-                        zapisovac.writeUTF(((Vehicle)current).getBrand());
-                        zapisovac.writeUTF(((Vehicle)current).getModel());
-                        zapisovac.writeInt(((Vehicle)current).getPower());
-                        zapisovac.writeInt(((Vehicle)current).getYearOfManufacture());
-                        zapisovac.writeDouble(((Vehicle)current).getEngineDisplacement());
-                        zapisovac.writeInt(((Vehicle)current).getDrivenKm());
-                        zapisovac.writeUTF(((Vehicle)current).getBodyType());
-                        zapisovac.writeUTF(((Vehicle)current).getColor());
-                        zapisovac.writeInt(((Vehicle)current).getPrice());
-                        zapisovac.writeUTF(((Vehicle)current).getFuel());
-                        zapisovac.writeUTF(((Vehicle)current).getComment());
+                        writer.writeUTF("Car");
+                        writer.writeUTF(((Vehicle)current).getOwner().getFirstName());
+                        writer.writeUTF(((Vehicle)current).getOwner().getLastName());
+                        writer.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getDay());
+                        writer.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getMonth());
+                        writer.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getYear());
+                        writer.writeUTF(((Vehicle)current).getOwner().getLocation().getCity());
+                        writer.writeLong(((Vehicle)current).getOwner().getLocation().getPhone());
+                        writer.writeUTF(((Vehicle)current).getVehicleType());
+                        writer.writeUTF(((Vehicle)current).getBrand());
+                        writer.writeUTF(((Vehicle)current).getModel());
+                        writer.writeInt(((Vehicle)current).getPower());
+                        writer.writeInt(((Vehicle)current).getYearOfManufacture());
+                        writer.writeDouble(((Vehicle)current).getEngineDisplacement());
+                        writer.writeInt(((Vehicle)current).getDrivenKm());
+                        writer.writeUTF(((Vehicle)current).getBodyType());
+                        writer.writeUTF(((Vehicle)current).getColor());
+                        writer.writeInt(((Vehicle)current).getPrice());
+                        writer.writeUTF(((Vehicle)current).getFuel());
+                        writer.writeUTF(((Vehicle)current).getComment());
                     } else if (current instanceof Truck) {
-                        zapisovac.writeUTF("Kamion");
-                        zapisovac.writeUTF(((Vehicle)current).getOwner().getFirstName());
-                        zapisovac.writeUTF(((Vehicle)current).getOwner().getLastName());
-                        zapisovac.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getDay());
-                        zapisovac.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getMonth());
-                        zapisovac.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getYear());
-                        zapisovac.writeUTF(((Vehicle)current).getOwner().getLocation().getCity());
-                        zapisovac.writeLong(((Vehicle)current).getOwner().getLocation().getPhone());
-                        zapisovac.writeUTF(((Vehicle)current).getVehicleType());
-                        zapisovac.writeUTF(((Vehicle)current).getBrand());
-                        zapisovac.writeUTF(((Vehicle)current).getModel());
-                        zapisovac.writeInt(((Vehicle)current).getPower());
-                        zapisovac.writeInt(((Vehicle)current).getYearOfManufacture());
-                        zapisovac.writeDouble(((Vehicle)current).getEngineDisplacement());
-                        zapisovac.writeInt(((Vehicle)current).getDrivenKm());
-                        zapisovac.writeUTF(((Vehicle)current).getBodyType());
-                        zapisovac.writeUTF(((Vehicle)current).getColor());
-                        zapisovac.writeInt(((Vehicle)current).getPrice());
-                        zapisovac.writeUTF(((Vehicle)current).getFuel());
-                        zapisovac.writeInt(((Truck)((Vehicle)current)).getMaxLoadCapacity());
-                        zapisovac.writeUTF(((Truck)((Vehicle)current)).getEmissionClass());
-                        zapisovac.writeUTF(((Vehicle)current).getComment());
+                        writer.writeUTF("Truck");
+                        writer.writeUTF(((Vehicle)current).getOwner().getFirstName());
+                        writer.writeUTF(((Vehicle)current).getOwner().getLastName());
+                        writer.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getDay());
+                        writer.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getMonth());
+                        writer.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getYear());
+                        writer.writeUTF(((Vehicle)current).getOwner().getLocation().getCity());
+                        writer.writeLong(((Vehicle)current).getOwner().getLocation().getPhone());
+                        writer.writeUTF(((Vehicle)current).getVehicleType());
+                        writer.writeUTF(((Vehicle)current).getBrand());
+                        writer.writeUTF(((Vehicle)current).getModel());
+                        writer.writeInt(((Vehicle)current).getPower());
+                        writer.writeInt(((Vehicle)current).getYearOfManufacture());
+                        writer.writeDouble(((Vehicle)current).getEngineDisplacement());
+                        writer.writeInt(((Vehicle)current).getDrivenKm());
+                        writer.writeUTF(((Vehicle)current).getBodyType());
+                        writer.writeUTF(((Vehicle)current).getColor());
+                        writer.writeInt(((Vehicle)current).getPrice());
+                        writer.writeUTF(((Vehicle)current).getFuel());
+                        writer.writeInt(((Truck)((Vehicle)current)).getMaxLoadCapacity());
+                        writer.writeUTF(((Truck)((Vehicle)current)).getEmissionClass());
+                        writer.writeUTF(((Vehicle)current).getComment());
                     } else if (current instanceof Bus) {
-                        zapisovac.writeUTF("Autobus");
-                        zapisovac.writeUTF(((Vehicle)current).getOwner().getFirstName());
-                        zapisovac.writeUTF(((Vehicle)current).getOwner().getLastName());
-                        zapisovac.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getDay());
-                        zapisovac.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getMonth());
-                        zapisovac.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getYear());
-                        zapisovac.writeUTF(((Vehicle)current).getOwner().getLocation().getCity());
-                        zapisovac.writeLong(((Vehicle)current).getOwner().getLocation().getPhone());
-                        zapisovac.writeUTF(((Vehicle)current).getVehicleType());
-                        zapisovac.writeUTF(((Vehicle)current).getBrand());
-                        zapisovac.writeUTF(((Vehicle)current).getModel());
-                        zapisovac.writeInt(((Vehicle)current).getPower());
-                        zapisovac.writeInt(((Vehicle)current).getYearOfManufacture());
-                        zapisovac.writeDouble(((Vehicle)current).getEngineDisplacement());
-                        zapisovac.writeInt(((Vehicle)current).getDrivenKm());
-                        zapisovac.writeUTF(((Vehicle)current).getBodyType());
-                        zapisovac.writeUTF(((Vehicle)current).getColor());
-                        zapisovac.writeInt(((Vehicle)current).getPrice());
-                        zapisovac.writeUTF(((Vehicle)current).getFuel());
-                        zapisovac.writeInt(((Bus)((Vehicle)current)).getSeatCount());
-                        zapisovac.writeUTF(((Bus)((Vehicle)current)).getEmissionClass());
-                        zapisovac.writeUTF(((Vehicle)current).getComment());
+                        writer.writeUTF("Bus");
+                        writer.writeUTF(((Vehicle)current).getOwner().getFirstName());
+                        writer.writeUTF(((Vehicle)current).getOwner().getLastName());
+                        writer.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getDay());
+                        writer.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getMonth());
+                        writer.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getYear());
+                        writer.writeUTF(((Vehicle)current).getOwner().getLocation().getCity());
+                        writer.writeLong(((Vehicle)current).getOwner().getLocation().getPhone());
+                        writer.writeUTF(((Vehicle)current).getVehicleType());
+                        writer.writeUTF(((Vehicle)current).getBrand());
+                        writer.writeUTF(((Vehicle)current).getModel());
+                        writer.writeInt(((Vehicle)current).getPower());
+                        writer.writeInt(((Vehicle)current).getYearOfManufacture());
+                        writer.writeDouble(((Vehicle)current).getEngineDisplacement());
+                        writer.writeInt(((Vehicle)current).getDrivenKm());
+                        writer.writeUTF(((Vehicle)current).getBodyType());
+                        writer.writeUTF(((Vehicle)current).getColor());
+                        writer.writeInt(((Vehicle)current).getPrice());
+                        writer.writeUTF(((Vehicle)current).getFuel());
+                        writer.writeInt(((Bus)((Vehicle)current)).getSeatCount());
+                        writer.writeUTF(((Bus)((Vehicle)current)).getEmissionClass());
+                        writer.writeUTF(((Vehicle)current).getComment());
                     } else if (current instanceof Motorcycle) {
-                        zapisovac.writeUTF("Motorka");
-                        zapisovac.writeUTF(((Vehicle)current).getOwner().getFirstName());
-                        zapisovac.writeUTF(((Vehicle)current).getOwner().getLastName());
-                        zapisovac.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getDay());
-                        zapisovac.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getMonth());
-                        zapisovac.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getYear());
-                        zapisovac.writeUTF(((Vehicle)current).getOwner().getLocation().getCity());
-                        zapisovac.writeLong(((Vehicle)current).getOwner().getLocation().getPhone());
-                        zapisovac.writeUTF(((Vehicle)current).getVehicleType());
-                        zapisovac.writeUTF(((Vehicle)current).getBrand());
-                        zapisovac.writeUTF(((Vehicle)current).getModel());
-                        zapisovac.writeInt(((Vehicle)current).getPower());
-                        zapisovac.writeInt(((Vehicle)current).getYearOfManufacture());
-                        zapisovac.writeDouble(((Vehicle)current).getEngineDisplacement());
-                        zapisovac.writeInt(((Vehicle)current).getDrivenKm());
-                        zapisovac.writeUTF(((Vehicle)current).getBodyType());
-                        zapisovac.writeUTF(((Vehicle)current).getColor());
-                        zapisovac.writeInt(((Vehicle)current).getPrice());
-                        zapisovac.writeUTF(((Vehicle)current).getFuel());
-                        zapisovac.writeUTF(((Vehicle)current).getComment());
+                        writer.writeUTF("Motorcycle");
+                        writer.writeUTF(((Vehicle)current).getOwner().getFirstName());
+                        writer.writeUTF(((Vehicle)current).getOwner().getLastName());
+                        writer.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getDay());
+                        writer.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getMonth());
+                        writer.writeInt(((Vehicle)current).getOwner().getDateOfBirth().getYear());
+                        writer.writeUTF(((Vehicle)current).getOwner().getLocation().getCity());
+                        writer.writeLong(((Vehicle)current).getOwner().getLocation().getPhone());
+                        writer.writeUTF(((Vehicle)current).getVehicleType());
+                        writer.writeUTF(((Vehicle)current).getBrand());
+                        writer.writeUTF(((Vehicle)current).getModel());
+                        writer.writeInt(((Vehicle)current).getPower());
+                        writer.writeInt(((Vehicle)current).getYearOfManufacture());
+                        writer.writeDouble(((Vehicle)current).getEngineDisplacement());
+                        writer.writeInt(((Vehicle)current).getDrivenKm());
+                        writer.writeUTF(((Vehicle)current).getBodyType());
+                        writer.writeUTF(((Vehicle)current).getColor());
+                        writer.writeInt(((Vehicle)current).getPrice());
+                        writer.writeUTF(((Vehicle)current).getFuel());
+                        writer.writeUTF(((Vehicle)current).getComment());
                     }  
                 } else if (current instanceof Machine) {
                     if (current instanceof BrushCutter) {
-                        zapisovac.writeUTF("Krovinorez");
-                        zapisovac.writeUTF(((Machine)current).getOwner().getFirstName());
-                        zapisovac.writeUTF(((Machine)current).getOwner().getLastName());
-                        zapisovac.writeInt(((Machine)current).getOwner().getDateOfBirth().getDay());
-                        zapisovac.writeInt(((Machine)current).getOwner().getDateOfBirth().getMonth());
-                        zapisovac.writeInt(((Machine)current).getOwner().getDateOfBirth().getYear());
-                        zapisovac.writeUTF(((Machine)current).getOwner().getLocation().getCity());
-                        zapisovac.writeLong(((Machine)current).getOwner().getLocation().getPhone());
-                        zapisovac.writeUTF(((Machine)current).getMachineType());
-                        zapisovac.writeInt(((Machine)current).getPowerInKw());
-                        zapisovac.writeDouble(((Machine)current).getVolume());
-                        zapisovac.writeUTF(((Machine)current).getBrand());
-                        zapisovac.writeInt(((Machine)current).getYearOfManufacture());
-                        zapisovac.writeInt(((Machine)current).getMonthsOfUse());
-                        zapisovac.writeInt(((Machine)current).getPrice());
-                        zapisovac.writeUTF(((Machine)current).getComment());
+                        writer.writeUTF("BrushCutter");
+                        writer.writeUTF(((Machine)current).getOwner().getFirstName());
+                        writer.writeUTF(((Machine)current).getOwner().getLastName());
+                        writer.writeInt(((Machine)current).getOwner().getDateOfBirth().getDay());
+                        writer.writeInt(((Machine)current).getOwner().getDateOfBirth().getMonth());
+                        writer.writeInt(((Machine)current).getOwner().getDateOfBirth().getYear());
+                        writer.writeUTF(((Machine)current).getOwner().getLocation().getCity());
+                        writer.writeLong(((Machine)current).getOwner().getLocation().getPhone());
+                        writer.writeUTF(((Machine)current).getMachineType());
+                        writer.writeInt(((Machine)current).getPowerInKw());
+                        writer.writeDouble(((Machine)current).getVolume());
+                        writer.writeUTF(((Machine)current).getBrand());
+                        writer.writeInt(((Machine)current).getYearOfManufacture());
+                        writer.writeInt(((Machine)current).getMonthsOfUse());
+                        writer.writeInt(((Machine)current).getPrice());
+                        writer.writeUTF(((Machine)current).getComment());
                     } else if (current instanceof LawnMower) {
-                        zapisovac.writeUTF("Kosacka");
-                        zapisovac.writeUTF(((Machine)current).getOwner().getFirstName());
-                        zapisovac.writeUTF(((Machine)current).getOwner().getLastName());
-                        zapisovac.writeInt(((Machine)current).getOwner().getDateOfBirth().getDay());
-                        zapisovac.writeInt(((Machine)current).getOwner().getDateOfBirth().getMonth());
-                        zapisovac.writeInt(((Machine)current).getOwner().getDateOfBirth().getYear());
-                        zapisovac.writeUTF(((Machine)current).getOwner().getLocation().getCity());
-                        zapisovac.writeLong(((Machine)current).getOwner().getLocation().getPhone());
-                        zapisovac.writeUTF(((Machine)current).getMachineType());
-                        zapisovac.writeInt(((Machine)current).getPowerInKw());
-                        zapisovac.writeDouble(((Machine)current).getVolume());
-                        zapisovac.writeUTF(((Machine)current).getBrand());
-                        zapisovac.writeInt(((Machine)current).getYearOfManufacture());
-                        zapisovac.writeInt(((Machine)current).getMonthsOfUse());
-                        zapisovac.writeInt(((Machine)current).getPrice());
-                        zapisovac.writeUTF(((Machine)current).getComment());
+                        writer.writeUTF("LawnMower");
+                        writer.writeUTF(((Machine)current).getOwner().getFirstName());
+                        writer.writeUTF(((Machine)current).getOwner().getLastName());
+                        writer.writeInt(((Machine)current).getOwner().getDateOfBirth().getDay());
+                        writer.writeInt(((Machine)current).getOwner().getDateOfBirth().getMonth());
+                        writer.writeInt(((Machine)current).getOwner().getDateOfBirth().getYear());
+                        writer.writeUTF(((Machine)current).getOwner().getLocation().getCity());
+                        writer.writeLong(((Machine)current).getOwner().getLocation().getPhone());
+                        writer.writeUTF(((Machine)current).getMachineType());
+                        writer.writeInt(((Machine)current).getPowerInKw());
+                        writer.writeDouble(((Machine)current).getVolume());
+                        writer.writeUTF(((Machine)current).getBrand());
+                        writer.writeInt(((Machine)current).getYearOfManufacture());
+                        writer.writeInt(((Machine)current).getMonthsOfUse());
+                        writer.writeInt(((Machine)current).getPrice());
+                        writer.writeUTF(((Machine)current).getComment());
                     } else if (current instanceof Chainsaw) {
-                        zapisovac.writeUTF("MotorovaPila");
-                        zapisovac.writeUTF(((Machine)current).getOwner().getFirstName());
-                        zapisovac.writeUTF(((Machine)current).getOwner().getLastName());
-                        zapisovac.writeInt(((Machine)current).getOwner().getDateOfBirth().getDay());
-                        zapisovac.writeInt(((Machine)current).getOwner().getDateOfBirth().getMonth());
-                        zapisovac.writeInt(((Machine)current).getOwner().getDateOfBirth().getYear());
-                        zapisovac.writeUTF(((Machine)current).getOwner().getLocation().getCity());
-                        zapisovac.writeLong(((Machine)current).getOwner().getLocation().getPhone());
-                        zapisovac.writeUTF(((Machine)current).getMachineType());
-                        zapisovac.writeInt(((Machine)current).getPowerInKw());
-                        zapisovac.writeDouble(((Machine)current).getVolume());
-                        zapisovac.writeUTF(((Machine)current).getBrand());
-                        zapisovac.writeInt(((Machine)current).getYearOfManufacture());
-                        zapisovac.writeInt(((Machine)current).getMonthsOfUse());
-                        zapisovac.writeInt(((Machine)current).getPrice());
-                        zapisovac.writeUTF(((Machine)current).getComment());
+                        writer.writeUTF("Chainsaw");
+                        writer.writeUTF(((Machine)current).getOwner().getFirstName());
+                        writer.writeUTF(((Machine)current).getOwner().getLastName());
+                        writer.writeInt(((Machine)current).getOwner().getDateOfBirth().getDay());
+                        writer.writeInt(((Machine)current).getOwner().getDateOfBirth().getMonth());
+                        writer.writeInt(((Machine)current).getOwner().getDateOfBirth().getYear());
+                        writer.writeUTF(((Machine)current).getOwner().getLocation().getCity());
+                        writer.writeLong(((Machine)current).getOwner().getLocation().getPhone());
+                        writer.writeUTF(((Machine)current).getMachineType());
+                        writer.writeInt(((Machine)current).getPowerInKw());
+                        writer.writeDouble(((Machine)current).getVolume());
+                        writer.writeUTF(((Machine)current).getBrand());
+                        writer.writeInt(((Machine)current).getYearOfManufacture());
+                        writer.writeInt(((Machine)current).getMonthsOfUse());
+                        writer.writeInt(((Machine)current).getPrice());
+                        writer.writeUTF(((Machine)current).getComment());
                     }
                 } else if (current instanceof ElectronicDevice) {
                     if (current instanceof Computer) {
-                        zapisovac.writeUTF("Pocitac");
-                        zapisovac.writeUTF(((ElectronicDevice)current).getOwner().getFirstName());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getOwner().getLastName());
-                        zapisovac.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getDay());
-                        zapisovac.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getMonth());
-                        zapisovac.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getYear());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getOwner().getLocation().getCity());
-                        zapisovac.writeLong(((ElectronicDevice)current).getOwner().getLocation().getPhone());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getType());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getBrand());
-                        zapisovac.writeInt(((ElectronicDevice)current).getYearOfManufacture());
-                        zapisovac.writeInt(((ElectronicDevice)current).getMonthsOfUse());
-                        zapisovac.writeInt(((ElectronicDevice)current).getPrice());
-                        zapisovac.writeInt(((Computer)((ElectronicDevice)current)).getProcessorFrequency());
-                        zapisovac.writeDouble(((Computer)((ElectronicDevice)current)).getRam());
-                        zapisovac.writeDouble(((Computer)((ElectronicDevice)current)).getInternalStorage());
-                        zapisovac.writeInt(((Computer)((ElectronicDevice)current)).getDisplayDiagonal());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getComment());
+                        writer.writeUTF("Computer");
+                        writer.writeUTF(((ElectronicDevice)current).getOwner().getFirstName());
+                        writer.writeUTF(((ElectronicDevice)current).getOwner().getLastName());
+                        writer.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getDay());
+                        writer.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getMonth());
+                        writer.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getYear());
+                        writer.writeUTF(((ElectronicDevice)current).getOwner().getLocation().getCity());
+                        writer.writeLong(((ElectronicDevice)current).getOwner().getLocation().getPhone());
+                        writer.writeUTF(((ElectronicDevice)current).getType());
+                        writer.writeUTF(((ElectronicDevice)current).getBrand());
+                        writer.writeInt(((ElectronicDevice)current).getYearOfManufacture());
+                        writer.writeInt(((ElectronicDevice)current).getMonthsOfUse());
+                        writer.writeInt(((ElectronicDevice)current).getPrice());
+                        writer.writeInt(((Computer)((ElectronicDevice)current)).getProcessorFrequency());
+                        writer.writeDouble(((Computer)((ElectronicDevice)current)).getRam());
+                        writer.writeDouble(((Computer)((ElectronicDevice)current)).getInternalStorage());
+                        writer.writeInt(((Computer)((ElectronicDevice)current)).getDisplayDiagonal());
+                        writer.writeUTF(((ElectronicDevice)current).getComment());
                     } else if (current instanceof Mobile) {
-                        zapisovac.writeUTF("Mobil");
-                        zapisovac.writeUTF(((ElectronicDevice)current).getOwner().getFirstName());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getOwner().getLastName());
-                        zapisovac.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getDay());
-                        zapisovac.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getMonth());
-                        zapisovac.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getYear());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getOwner().getLocation().getCity());
-                        zapisovac.writeLong(((ElectronicDevice)current).getOwner().getLocation().getPhone());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getType());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getBrand());
-                        zapisovac.writeInt(((ElectronicDevice)current).getYearOfManufacture());
-                        zapisovac.writeInt(((ElectronicDevice)current).getMonthsOfUse());
-                        zapisovac.writeInt(((ElectronicDevice)current).getPrice());
-                        zapisovac.writeInt(((Mobile)((ElectronicDevice)current)).getProcessorFrequency());
-                        zapisovac.writeDouble(((Mobile)((ElectronicDevice)current)).getRam());
-                        zapisovac.writeDouble(((Mobile)((ElectronicDevice)current)).getInternalStorage());
-                        zapisovac.writeInt(((Mobile)((ElectronicDevice)current)).getBatteryLife());
-                        zapisovac.writeInt(((Mobile)((ElectronicDevice)current)).getCameraResolution());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getComment());
+                        writer.writeUTF("Mobile");
+                        writer.writeUTF(((ElectronicDevice)current).getOwner().getFirstName());
+                        writer.writeUTF(((ElectronicDevice)current).getOwner().getLastName());
+                        writer.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getDay());
+                        writer.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getMonth());
+                        writer.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getYear());
+                        writer.writeUTF(((ElectronicDevice)current).getOwner().getLocation().getCity());
+                        writer.writeLong(((ElectronicDevice)current).getOwner().getLocation().getPhone());
+                        writer.writeUTF(((ElectronicDevice)current).getType());
+                        writer.writeUTF(((ElectronicDevice)current).getBrand());
+                        writer.writeInt(((ElectronicDevice)current).getYearOfManufacture());
+                        writer.writeInt(((ElectronicDevice)current).getMonthsOfUse());
+                        writer.writeInt(((ElectronicDevice)current).getPrice());
+                        writer.writeInt(((Mobile)((ElectronicDevice)current)).getProcessorFrequency());
+                        writer.writeDouble(((Mobile)((ElectronicDevice)current)).getRam());
+                        writer.writeDouble(((Mobile)((ElectronicDevice)current)).getInternalStorage());
+                        writer.writeInt(((Mobile)((ElectronicDevice)current)).getBatteryLife());
+                        writer.writeInt(((Mobile)((ElectronicDevice)current)).getCameraResolution());
+                        writer.writeUTF(((ElectronicDevice)current).getComment());
                     } else if (current instanceof Electronics) {
-                        zapisovac.writeUTF("Elektronika");
-                        zapisovac.writeUTF(((ElectronicDevice)current).getOwner().getFirstName());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getOwner().getLastName());
-                        zapisovac.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getDay());
-                        zapisovac.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getMonth());
-                        zapisovac.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getYear());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getOwner().getLocation().getCity());
-                        zapisovac.writeLong(((ElectronicDevice)current).getOwner().getLocation().getPhone());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getType());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getBrand());
-                        zapisovac.writeInt(((ElectronicDevice)current).getYearOfManufacture());
-                        zapisovac.writeInt(((ElectronicDevice)current).getMonthsOfUse());
-                        zapisovac.writeInt(((ElectronicDevice)current).getPrice());
-                        zapisovac.writeUTF(((ElectronicDevice)current).getComment());
+                        writer.writeUTF("Electronics");
+                        writer.writeUTF(((ElectronicDevice)current).getOwner().getFirstName());
+                        writer.writeUTF(((ElectronicDevice)current).getOwner().getLastName());
+                        writer.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getDay());
+                        writer.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getMonth());
+                        writer.writeInt(((ElectronicDevice)current).getOwner().getDateOfBirth().getYear());
+                        writer.writeUTF(((ElectronicDevice)current).getOwner().getLocation().getCity());
+                        writer.writeLong(((ElectronicDevice)current).getOwner().getLocation().getPhone());
+                        writer.writeUTF(((ElectronicDevice)current).getType());
+                        writer.writeUTF(((ElectronicDevice)current).getBrand());
+                        writer.writeInt(((ElectronicDevice)current).getYearOfManufacture());
+                        writer.writeInt(((ElectronicDevice)current).getMonthsOfUse());
+                        writer.writeInt(((ElectronicDevice)current).getPrice());
+                        writer.writeUTF(((ElectronicDevice)current).getComment());
                     }
                 }   
             } 
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Chyba! " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error! " + ex.getMessage());
         } finally {
-            if (zapisovac != null) {
+            if (writer != null) {
                 try {
-                    zapisovac.close();
+                    writer.close();
                 } catch (FileNotFoundException ex) {
-                    JOptionPane.showMessageDialog(null, "Chyba! " + ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "Error! " + ex.getMessage());
                 }
             }
         }
     }
     /**
-     * Metóda nacita databazu zo suboru postupne, tak ako sa ukladá, tak sa aj cíta.
-     * Pri chybe sa výnimka rethrowuje do nadradenej triedy
+     * Method loads the database from a file sequentially, reading it the same way it was written.
+     * On error, the exception is rethrown to the parent class.
      * @return boolean
      * @throws IOException 
      */
     
     
     public boolean loadDatabase() throws IOException {
-        boolean koniecSuboru = false;
-        DataInputStream citac = null;
+        boolean endOfFile = false;
+        DataInputStream reader = null;
         try {
-            File subor = new File ("databaza.bin");
-            FileInputStream citaj = new FileInputStream(subor);
-            citac = new DataInputStream(citaj);
+            File file = new File ("database.bin");
+            FileInputStream inputStream = new FileInputStream(file);
+            reader = new DataInputStream(inputStream);
             do {
                 try {
-                    String type = citac.readUTF();
-                    if (type.equals("Auto")) {
-                        this.addListing(new Car (new Person (citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readUTF(), citac.readLong()), citac.readUTF(), citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readDouble(), citac.readInt(), citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readUTF(), citac.readUTF()));                                            
-                    } else if (type.equals("Motorka")) {
-                        this.addListing(new Motorcycle (new Person (citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readUTF(), citac.readLong()), citac.readUTF(), citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readDouble(), citac.readInt(), citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readUTF(), citac.readUTF()));                                            
-                    } else if (type.equals("Kamion")) {
-                        this.addListing(new Truck (new Person (citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readUTF(), citac.readLong()), citac.readUTF(), citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readDouble(), citac.readInt(), citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readUTF(), citac.readInt(), citac.readUTF(), citac.readUTF()));
-                    } else if (type.equals("Autobus")) {
-                        this.addListing(new Bus (new Person (citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readUTF(), citac.readLong()), citac.readUTF(), citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readDouble(), citac.readInt(), citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readUTF(), citac.readInt(), citac.readUTF(), citac.readUTF()));
-                    } else if (type.equals("Kosacka")) {
-                        this.addListing(new LawnMower (new Person (citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readUTF(), citac.readLong()), citac.readUTF(), citac.readInt(), citac.readDouble(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readUTF()));
-                    } else if (type.equals("Krovinorez")) {
-                        this.addListing(new BrushCutter (new Person (citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readUTF(), citac.readLong()), citac.readUTF(), citac.readInt(), citac.readDouble(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readUTF()));
-                    } else if (type.equals("MotorovaPila")) {
-                        this.addListing(new Chainsaw (new Person (citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readUTF(), citac.readLong()), citac.readUTF(), citac.readInt(), citac.readDouble(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readUTF()));
-                    } else if (type.equals("Elektronika")) {
-                        this.addListing(new Electronics (new Person (citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readUTF(), citac.readLong()), citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readUTF()));
-                    } else if (type.equals("Pocitac")) {
-                        this.addListing(new Computer (new Person (citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readUTF(), citac.readLong()), citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readDouble(), citac.readDouble(), citac.readInt(), citac.readUTF()));
-                    } else if (type.equals("Mobil")) {
-                        this.addListing(new Mobile (new Person (citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readUTF(), citac.readLong()), citac.readUTF(), citac.readUTF(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readInt(), citac.readDouble(), citac.readDouble(), citac.readInt(), citac.readInt(), citac.readUTF()));
+                    String type = reader.readUTF();
+                    if (type.equals("Car")) {
+                        this.addListing(new Car (new Person (reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readUTF(), reader.readLong()), reader.readUTF(), reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readDouble(), reader.readInt(), reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readUTF(), reader.readUTF()));                                            
+                    } else if (type.equals("Motorcycle")) {
+                        this.addListing(new Motorcycle (new Person (reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readUTF(), reader.readLong()), reader.readUTF(), reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readDouble(), reader.readInt(), reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readUTF(), reader.readUTF()));                                            
+                    } else if (type.equals("Truck")) {
+                        this.addListing(new Truck (new Person (reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readUTF(), reader.readLong()), reader.readUTF(), reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readDouble(), reader.readInt(), reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readUTF(), reader.readInt(), reader.readUTF(), reader.readUTF()));
+                    } else if (type.equals("Bus")) {
+                        this.addListing(new Bus (new Person (reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readUTF(), reader.readLong()), reader.readUTF(), reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readDouble(), reader.readInt(), reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readUTF(), reader.readInt(), reader.readUTF(), reader.readUTF()));
+                    } else if (type.equals("LawnMower")) {
+                        this.addListing(new LawnMower (new Person (reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readUTF(), reader.readLong()), reader.readUTF(), reader.readInt(), reader.readDouble(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readUTF()));
+                    } else if (type.equals("BrushCutter")) {
+                        this.addListing(new BrushCutter (new Person (reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readUTF(), reader.readLong()), reader.readUTF(), reader.readInt(), reader.readDouble(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readUTF()));
+                    } else if (type.equals("Chainsaw")) {
+                        this.addListing(new Chainsaw (new Person (reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readUTF(), reader.readLong()), reader.readUTF(), reader.readInt(), reader.readDouble(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readUTF()));
+                    } else if (type.equals("Electronics")) {
+                        this.addListing(new Electronics (new Person (reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readUTF(), reader.readLong()), reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readUTF()));
+                    } else if (type.equals("Computer")) {
+                        this.addListing(new Computer (new Person (reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readUTF(), reader.readLong()), reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readDouble(), reader.readDouble(), reader.readInt(), reader.readUTF()));
+                    } else if (type.equals("Mobile")) {
+                        this.addListing(new Mobile (new Person (reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readUTF(), reader.readLong()), reader.readUTF(), reader.readUTF(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readInt(), reader.readDouble(), reader.readDouble(), reader.readInt(), reader.readInt(), reader.readUTF()));
                     }
                 } catch (EOFException ex) {
-                    koniecSuboru = true;
+                    endOfFile = true;
                 }
-            } while (!koniecSuboru);
+            } while (!endOfFile);
         } catch (FileNotFoundException ex) {
             throw ex;
         } finally {
-            if (citac != null) {
+            if (reader != null) {
                 try {
-                    citac.close();
+                    reader.close();
                 } catch (FileNotFoundException ex) {
                     throw ex;
                 }

@@ -38,8 +38,8 @@ public class Machine implements IForSale {
     public String toString() {
         String text = "Garden machine " + this.machineType + " " + this.brand + ", power: " + this.powerInKw + " KW, engine volume " + this.volume + ", manufactured in year " + this.yearOfManufacture; 
         String text2 = "used by previous owner for " + this.monthsOfUse + " months, offered by: " + this.owner.toString() + " for price " + this.price + "€\n";
-        String komentar1 = "User comment: " + this.comment;
-        return text + text2 + komentar1;
+        String commentLine = "User comment: " + this.comment;
+        return text + text2 + commentLine;
     }
     
     public void print() {
