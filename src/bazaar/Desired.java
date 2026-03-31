@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bazar;
+package bazaar;
 
 import java.awt.GridLayout;
 import java.awt.Label;
@@ -20,48 +20,48 @@ import javax.swing.WindowConstants;
  *
  * @author Tomáš
  */
-public class Pozadovane extends javax.swing.JFrame {
-    private ArrayList<INaPredaj> pozadovane;
-    private Inzerat inz;
-    private JButton[] tlacitka;
+public class Desired extends javax.swing.JFrame {
+    private ArrayList<IForSale> desired;
+    private Listing listing;
+    private JButton[] buttons;
 
     /**
-     * Creates new form Pozadovane
+     * Creates new form Desired
      */
     /**
      * Konstruktor automaticky generuje buttony a priradzuje im listenery
      * Po stlacenie jednotlivych buttonov sa podhodi otazka k kúpe
      * Ak stlacime ano, inzerat sa odstrani z databazy a databaza sa nanovo nahra do suboru 
-     * @param pozadovane
-     * @param inz 
+     * @param desired
+     * @param listing 
      */
-    public Pozadovane(ArrayList<INaPredaj> pozadovane, Inzerat inz) {
+    public Desired(ArrayList<IForSale> desired, Listing listing) {
         this.initComponents();
-        this.inz = inz;
-        this.pozadovane = new ArrayList<INaPredaj>();
-        this.pozadovane = pozadovane;
-        this.tlacitka = new JButton[this.pozadovane.size()];
-        System.out.println(this.inz.toString());
-        System.out.println(this.pozadovane);
+        this.listing = listing;
+        this.desired = new ArrayList<IForSale>();
+        this.desired = desired;
+        this.buttons = new JButton[this.desired.size()];
+        System.out.println(this.listing.toString());
+        System.out.println(this.desired);
         JFrame okno = new JFrame("Výber inzerátu");
         okno.setVisible(true);
-        if (this.pozadovane.size() != 0) {
-            for (int i = 0; i < this.tlacitka.length; i++) {
-                JButton btn = (new JButton(this.pozadovane.get(i).toString()));
+        if (this.desired.size() != 0) {
+            for (int i = 0; i < this.buttons.length; i++) {
+                JButton btn = (new JButton(this.desired.get(i).toString()));
                 okno.add(btn);
                 btn.addActionListener(new java.awt.event.ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
-                        String inzerat = btn.getText();
-                        for (int i = 0; i < inz.dajPocet(); i++) {
+                        String listingText = btn.getText();
+                        for (int i = 0; i < listing.getCount(); i++) {
                             if (true) {
-                                if (inz.poskytniInzerat(i).toString().equals(inzerat)) {
-                                    int reply = JOptionPane.showConfirmDialog(null, inzerat + "\n" + "Naozaj chceš kúpiť tento inzerát?", "Záväzná kúpa", JOptionPane.YES_NO_OPTION);
+                                if (listing.getListing(i).toString().equals(listingText)) {
+                                    int reply = JOptionPane.showConfirmDialog(null, listingText + "\n" + "Naozaj chceš kúpiť tento inzerát?", "Záväzná kúpa", JOptionPane.YES_NO_OPTION);
                                     if (reply == JOptionPane.YES_OPTION) {
-                                        inz.odoberInzerat(i);
+                                        listing.removeListing(i);
                                         JOptionPane.showMessageDialog(null, "Predané, ďakujeme za transakciu!");
                                         try {
-                                            inz.zapisDatabazu();
+                                            listing.saveDatabase();
                                             okno.dispose();
                                         } catch (IOException ex) {
                                             JOptionPane.showMessageDialog(null, "Nastala chyba, je nám ľúto");
@@ -74,9 +74,9 @@ public class Pozadovane extends javax.swing.JFrame {
                     }
                 }
                 );
-                this.tlacitka[i] = btn;   
+                this.buttons[i] = btn;   
             }
-            okno.setLayout(new GridLayout(this.pozadovane.size(), 0));
+            okno.setLayout(new GridLayout(this.desired.size(), 0));
             okno.pack();
         } else {
             okno.add(new Label("Žiadne inzeráty nevyhovujú Vaším podmienkam."));
@@ -96,6 +96,7 @@ public class Pozadovane extends javax.swing.JFrame {
     }
     
     
+
 
 
     /**
@@ -140,20 +141,20 @@ public class Pozadovane extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Pozadovane.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Desired.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Pozadovane.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Desired.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Pozadovane.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Desired.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Pozadovane.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Desired.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Pozadovane(new ArrayList<INaPredaj>(), new Inzerat()).setVisible(true);
+                new Desired(new ArrayList<IForSale>(), new Listing()).setVisible(true);
                 
             }
         });
